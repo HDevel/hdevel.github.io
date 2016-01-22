@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>fixed</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rhome.by/wp-content/uploads/2018/07/9-skandinavskii-stil-v-interere.jpg" target="_blank" download="img1.jpg" rel="noopener">Скачать v1</a>
+    <br>
+    <a href="http://www.setwalls.ru/download.php?file=201312/2560x1600/setwalls.ru-64906.jpg" target="_blank" download="img2.jpg" rel="noopener">Скачать v2</a>
+    <br>
+    <a href="https://rhome.by/wp-content/uploads/2018/07/9-skandinavskii-stil-v-interere.jpg" download="img1.jpg">Скачать v3 - без target и rel</a>
+    <br>
+    <a href="http://www.setwalls.ru/download.php?file=201312/2560x1600/setwalls.ru-64906.jpg" download="img2.jpg">Скачать v4 - без target и rel</a>
+    <br>
+
+    <div>скачать 2</div>
+
+    <script>
+        document.querySelector('div').addEventListener(function(){
+
+            unction onStartedDownload(id) {
+                console.log(`Started downloading: ${id}`);
+            }
+
+            function onFailed(error) {
+                console.log(`Download failed: ${error}`);
+            }
+
+            var downloadUrl = "https://rhome.by/wp-content/uploads/2018/07/9-skandinavskii-stil-v-interere.jpg";
+
+            var downloading = chrome.downloads.download({
+                url : downloadUrl,
+                filename : 'my-image-again.png',
+                conflictAction : 'uniquify'
+            });
+
+            downloading.then(onStartedDownload, onFailed);
+        })
+    </script>
+</body>
+</html>

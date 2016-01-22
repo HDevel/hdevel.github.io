@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <script src="../jq.js"></script>
+</head>
+<body>
+<style>
+    div[prlx-layer]{
+        width:100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -50px 0 0 -50px;
+    }
+</style>
+<div prlx-layer="-10" style="background-color: #f0f"></div>
+<div prlx-layer="-1" style="background-color: #f00"></div>
+<div prlx-layer="0" style="background-color: #ff0"></div>
+<div prlx-layer="2" style="background-color: #0f0"></div>
+<div prlx-layer="5" style="background-color: #00f"></div>
+<div id="log"></div>
+<script>
+    $(document).ready(function () {
+        window.ondevicemotion = function(event) {
+            $('div[prlx-layer]').each(function (i, v) {
+                v.acc = v.acc || { alpha: 0, beta: 0, gamma: 0 };
+
+                ['alpha', 'beta', 'gamma'].forEach(function (direction) {
+                    v.acc[direction] += event.rotationRate[direction];
+                    v.acc[direction] += v.acc[direction] < 0 ? 5 : -5;
+                });
+
+                v.acc.layer = parseInt($(v).attr('prlx-layer')) / 1000;
+                $(v).css('transform', 'translate(' + (v.acc.beta * v.acc.layer) + 'px, ' + (v.acc.alpha * v.acc.layer) + 'px)')
+            });
+//            $('#log').html(
+//                    'Rx = ' + event.rotationRate.alpha.toFixed(2) + '<br>' +
+//                    'Ry = ' + event.rotationRate.beta.toFixed(2) + '<br>' +
+//                    'Rz = ' + event.rotationRate.gamma.toFixed(2) + '<br>' +
+//                    ''
+//            );
+        }
+    });
+</script>
+</body>
+</html>

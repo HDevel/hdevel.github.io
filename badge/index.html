@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="utf-8" />
+    <style>
+        body{
+            padding: 10px;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        img{
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        a{
+            text-decoration: none;
+            color: #3af;
+        }
+
+        textarea:focus, input:focus{
+            outline: none;
+        }
+
+        .edit{
+            position: relative;
+            border: 2px solid #ccc;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .edit img{
+            margin-bottom: 0;
+        }
+
+        .edit input{
+            position: absolute;
+            padding: 0;
+            font-style: 10px;
+            background-color: transparent;
+            border: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .edit input#badge-title{
+            top: 5px;
+            left: 70px;
+            width: 500px;
+        }
+
+        .edit input#badge-description{
+            top: 23px;
+            left: 70px;
+            width: 500px;
+        }
+
+        .edit input#badge-get{
+            top: 38px;
+            left: 560px;
+            width: 40px;
+            text-align: right;
+        }
+
+        .edit input#badge-total{
+            top: 38px;
+            left: 610px;
+            width: 40px;
+        }
+
+        .edit span{
+            position: absolute;
+            top: 39px;
+            left: 603px;
+        }
+    </style>
+</head>
+<body>
+Тут можно взять иконки: <a href="https://www.iconfinder.com" target="_blank">iconfinder.com</a><br>
+<label>Иконка: </label><input type="text" id="badge-image" value=""><br>
+<label>Редактор: </label><br>
+<div class="edit">
+    <img src="" id="input" width="650" height="64">
+    <span>/</span>
+    <input type="text" id="badge-title" value="Название ачивки">
+    <input type="text" id="badge-description" value="Описание">
+    <input type="text" id="badge-get" value="40">
+    <input type="text" id="badge-total" value="100">
+</div>
+
+<img src="" id="xbox" width="650" height="64">
+<img src="" id="yandex" width="650" height="64">
+<script>
+    var themes = {
+        yandex: {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#ffdb4d';
+                var arr = 15;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(canvas.width - arr, 0);
+                ctx.lineTo(canvas.width, canvas.height * 0.5);
+                ctx.lineTo(canvas.width - arr, canvas.height);
+                ctx.lineTo(0, canvas.height);
+                ctx.fill();
+            },
+            title: {
+                color: '#000'
+            },
+            description: {
+                color: '#666'
+            },
+            counter: {
+                color: '#000'
+            },
+            progress: {
+                color: ['#fff', '#FF0000']
+            },
+            imageBG: {
+                color: 'rgba(0, 0, 0, .1)'
+            }
+        },
+        input: {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#eee';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            },
+            title: {
+                color: '#eee'
+            },
+            description: {
+                color: '#eee'
+            },
+            counter: {
+                color: '#eee'
+            },
+            progress: {
+                color: ['#ddd', '#aaa']
+            },
+            imageBG: {
+                color: 'rgba(0, 0, 0, .2)'
+            }
+        }
+    };
+
+    themes.yandex2 = prepareParams(themes.yandex);
+    themes.yandex2.title.color = '#f0f';
+
+    function draw(params){
+        params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
+
+        params.status[1] = params.status[1] || 0;
+        params.status[0] = params.status[0] || 0;
+        params.status[0] = Math.abs(params.status[0]);
+        params.status[1] = Math.abs(params.status[1]);
+        params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
+
+        params.width = params.width || 650;
+        params.height = params.height || 64;
+
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            icon = new Image(),
+            filled = params.status[0] / params.status[1],
+            textAddition = 0,
+
+            title = params.theme.title,
+            desc = params.theme.description,
+            counter = params.theme.counter,
+            progress = params.theme.progress,
+            image = params.theme.image,
+            imageBG = params.theme.imageBG;
+
+        canvas.width = params.width;
+        canvas.height = params.height;
+
+        params.theme.background(canvas, ctx);
+
+        if (!params.status[0] && !params.status[1]) {
+            textAddition += params.theme.textAddition[0];
+        } else {
+            ctx.fillStyle = progress.color[0];
+            ctx.fillRect(progress.position[0], progress.position[1], progress.size[0], progress.size[1]);
+            ctx.fillStyle = progress.color[1];
+            ctx.fillRect(progress.position[0], progress.position[1], progress.size[0] * filled, progress.size[1]);
+
+            ctx.fillStyle = counter.color;
+            ctx.font = counter.font;
+            ctx.fillText(params.status[0] + '/' + params.status[1], counter.position[0], counter.position[1]);
+        }
+
+        if (!params.description) {
+            textAddition += params.theme.textAddition[1];
+        } else {
+            ctx.fillStyle = desc.color;
+            ctx.font = desc.font;
+            ctx.fillText(params.description, desc.position[0], desc.position[1] + textAddition);
+        }
+
+        ctx.fillStyle = title.color;
+        ctx.font = title.font;
+        ctx.fillText(params.title, title.position[0], title.position[1] + textAddition);
+
+        ctx.fillStyle = imageBG.color;
+        ctx.fillRect(imageBG.position[0], imageBG.position[1], imageBG.size[0], imageBG.size[1]);
+
+        icon.crossOrigin = "anonymous";
+        icon.onload = function() {
+            ctx.drawImage(this, image.position[0], image.position[1], image.size[0], image.size[1]);
+            document.getElementById(params.id).src = canvas.toDataURL();
+        };
+        icon.src = params.image;
+    }
+
+    function prepareParams(params) {
+        var rtn = {},
+            defaultParams = {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#4E4E4E';
+                canvasRadius(ctx, 0, 0, 650, 64, 4);
+            },
+            title: { color: '#AEBD7C', position: [72, 18], font: 'bold 12px verdana' },
+            description: { color: '#fff', position: [72, 34], font: 'normal 11px verdana' },
+            counter: { color: '#fff', position: [560, 52], font: 'bold 11px verdana' },
+            progress: { color: ['#3E3E3E', '#F1EDC8'], position: [70, 42], size: [480, 13] },
+            image: { position: [8, 8], size: [48, 48] },
+            imageBG: { color: 'rgba(0, 0, 0, .1)', position: [4, 4], size: [56, 56] },
+            textAddition: [10, 8]
+        };
+
+        if(!params) {
+            return defaultPrams;
+        }
+
+        ['title', 'description', 'counter', 'progress', 'image', 'imageBG'].forEach(function (elem) {
+            ['position', 'color', 'size', 'font'].forEach(function (p) {
+                if (defaultParams[elem][p]) {
+                    params[elem] = params[elem] || {};
+                    rtn[elem] = rtn[elem] || {};
+                    rtn[elem][p] = params[elem][p] || defaultParams[elem][p];
+                }
+            })
+        });
+
+        ['textAddition', 'background'].forEach(function (v) {
+            rtn[v] = params[v] || defaultParams[v];
+        });
+
+        return rtn
+    }
+
+    function canvasRadius(ctx, x, y, w, h, tl, tr, br, bl){
+        var r = x + w,
+                b = y + h;
+
+        tr = tr || tl;
+        br = br || tl;
+        bl = bl || tl;
+
+        ctx.beginPath();
+        ctx.moveTo(x + tl,y);
+        ctx.lineTo(r - tr, y);
+        ctx.arcTo(r, y, r, tr + y, tr);
+        ctx.lineTo(r, b - br);
+        ctx.arcTo(r, b, r - br, b, br);
+        ctx.lineTo(x + bl, b);
+        ctx.arcTo(x, b, x, b - bl, bl);
+        ctx.lineTo(x, y + tl);
+        ctx.arcTo(x, y, x + tl, y, tl);
+        ctx.fill();
+
+    }
+
+    var inputs = document.getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', updateBadge);
+    }
+
+    updateBadge();
+
+    function updateBadge() {
+        var image = document.getElementById('badge-image').value,
+            title = document.getElementById('badge-title').value,
+            description = document.getElementById('badge-description').value,
+            badgeGet = parseInt(document.getElementById('badge-get').value),
+            total = parseInt(document.getElementById('badge-total').value);
+
+        ['xbox', 'yandex'].forEach(function (v) {
+            draw({
+                id: v,
+                image: image,
+                status: [badgeGet, total],
+                title: title,
+                description: description,
+                theme: prepareParams(themes[v] || {})
+            });
+        });
+
+        draw({
+            id: 'input',
+            image: image,
+            status: [1, 9],
+            title: '[ ]',
+            description: '[ ]',
+            theme: prepareParams(themes.input)
+        });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YT</title>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // <iframe src="//www.youtube.com/embed/D84dRrTbuZo?autoplay=1&amp;enablejsapi=1&amp;wmode=opaque" frameborder="0" scrolling="no" allowfullscreen="1" aria-label="Video"/>
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: 'D84dRrTbuZo',
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        setTimeout(function() {
+            player.loadVideoById({
+                'videoId': 'DcFpvolRN3w',
+                'startSeconds': 5,
+                'endSeconds': 60,
+                'suggestedQuality': 'large'
+            });
+        }, 10000);
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+    </script>
+</head>
+<body>
+
+
+<div id="player"></div>
+
+</body>
+</html>

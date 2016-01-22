@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="font-family: Arial;">
+<script>
+    document.body.innerHTML += [
+        '"serviceWorker" in navigator - <b>' + ('serviceWorker' in navigator) + '</b>',
+        '"PushManager" in window - <b>' + ('PushManager' in window) + '</b>',
+        'PushSubscription.prototype.hasOwnProperty("getKey") - <b>' + ('PushSubscription' in window && PushSubscription.prototype.hasOwnProperty("getKey")) + '</b>',
+        '"Notification" in window - <b>' + ("Notification" in window) + '</b>',
+        'ServiceWorkerRegistration.prototype.hasOwnProperty("showNotification") - <b>' + ('ServiceWorkerRegistration' in window && ServiceWorkerRegistration.prototype.hasOwnProperty("showNotification")) + '</b>',
+        '"fetch" in window - <b>' + ("fetch" in window) + '</b>',
+        '"indexedDB" in window - <b>' + ("indexedDB" in window) + '</b>',
+    ].join('<br>')
+</script>
+</body>
+</html>

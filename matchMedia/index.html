@@ -1,0 +1,149 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Match Media</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=1">
+</head>
+<body>
+<div id="div-log" style="position: absolute; bottom: 0; left: 0"></div>
+
+
+<script>
+
+    var test = [
+        {
+            range: [0, 550],
+            mods: {
+                columns: 1,
+                'has-left-nav': '',
+                'snippet-size': 's'
+            }
+        },
+        {
+            range: [550, 800],
+            mods: {
+                columns: 2,
+                'has-left-nav': '',
+                'snippet-size': 's'
+            }
+        },
+        {
+            range: [800, 1000],
+            mods: {
+                columns: 3,
+                'has-left-nav': '',
+                'snippet-size': 's'
+            }
+        },
+        {
+            range: [1000, 1200],
+            mods: {
+                columns: 4,
+                'has-left-nav': '',
+                'snippet-size': 's'
+            }
+        },
+        {
+            range: [1200, 1300],
+            mods: {
+                columns: 4,
+                'has-left-nav': '',
+                'snippet-size': 'm'
+            }
+        },
+        {
+            range: [1300, 1600],
+            mods: {
+                columns: 4,
+                'has-left-nav': 'yes',
+                'snippet-size': 'm'
+            }
+        },
+        {
+            range: [1600, Number.MAX_VALUE],
+            mods: {
+                columns: 5,
+                'has-left-nav': 'yes',
+                'snippet-size': 'm'
+            }
+        }
+    ];
+
+    var configs = [
+        {
+            media: '(max-width: 1200px)',
+            mods: {
+                'serp-size': ['s', 'm']
+            }
+        },
+        {
+            media: '(max-width: 1300px)',
+            mods: {
+                'has-left-nav': ['yes', 'no']
+            }
+        },
+        {
+            media: '(max-width: 549px)',
+            mods: {
+                'colums': '1'
+            }
+        },
+        {
+            media: '(min-width: 550px) and (max-width: 799px)',
+            mods: {
+                'colums': '2'
+            }
+        },
+        {
+            media: '(min-width: 800px) and (max-width: 999px)',
+            mods: {
+                'colums': '3'
+            }
+        },
+        {
+            media: '(min-width: 1000px) and (max-width: 1599px)',
+            mods: {
+                'colums': '4'
+            }
+        },
+        {
+            media: '(min-width: 1600px)',
+            mods: {
+                'colums': '5'
+            }
+        }
+    ];
+
+    configs.forEach(function(config) {
+        var mmm = window.matchMedia(config.media);
+
+        function callback(matches) {
+            for (var mod in config.mods) {
+                var state = config.mods[mod];
+
+                if (typeof state === 'string' && matches) {
+                    log('mod:' + mod + ' - ' + state);
+                }
+
+                if (Array.isArray(state)) {
+                    state = state[matches ? 0 : 1];
+                    log('mod:' + mod + ' - ' + state);
+                }
+            }
+        };
+
+        mmm.addListener(function(e) {
+            callback(e.matches);
+        });
+
+        callback(mmm.matches);
+    });
+
+
+    function log(str) {
+        document.getElementById('div-log').innerHTML += ('<br>' + str);
+    }
+</script>
+</body>
+</html>

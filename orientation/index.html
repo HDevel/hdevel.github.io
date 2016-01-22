@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <script src="../jq.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=1">
+</head>
+<body>
+<input type="text">
+<script>
+    lastOrient = '1';
+    lastWidth = 1;
+
+
+    $(document).ready(function () {
+//        log(window.innerWidth, window.innerHeight);
+
+
+
+
+        $(window).on('resize', function(){
+            setTimeout(function() {
+                var width = window.innerWidth,
+                        height = window.innerHeight,
+                        landscape = (width > height);
+
+                log(width, height, landscape);
+                if (landscape !== lastOrient && width !== lastWidth) {
+                    lastOrient = landscape;
+                    lastWidth = width;
+                }
+            }, 400);
+        });
+    });
+
+    function log(w, h, o){
+        $('body').append('<br> window.innerWidth = ' + w);
+        $('body').append('<br> window.innerHeight = ' + h);
+        $('body').append('<br> window.outerWidth = ' + window.outerWidth);
+        $('body').append('<br> window.outerHeight = ' + window.outerHeight);
+        $('body').append('<br> orient = ' + o);
+        $('body').append('<br> screen.width = ' + screen.width);
+        $('body').append('<br> screen.height = ' + screen.height);
+        $('body').append('<br> window.devicePixelRatio = ' + window.devicePixelRatio);
+        $('body').append('<br>----------------------------');
+    }
+</script>
+</body>
+</html>
