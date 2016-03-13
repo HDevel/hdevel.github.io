@@ -2,21 +2,185 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Some Title 19</title>
+    <title>B</title>
+    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <style>
+        .container{
+            width: 1024px;
+            height: 768px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -384px 0px 0px -512px;
+            background-color: #333;
+        }
 
-    <meta property="og:image" content="//proxy.mm-fol.serp.yandex.ru/?url=%2F%2Fvideo-tub-ru.yandex.net%2Fi%3Fid%3Df52f1ec6142c0d81c7b1da6be66e3c58-04-96&amp;strategy=proxy">
-    <meta property="og:title" content="19_Найдено на Яндекс.Видео: Топ-5 Star Wars &quot;Дуэли&quot;">
-    <meta property="og:description" content="Duel (Cause Of Death), Star Wars (Film Series), Video Game Culture, Film...">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="Яндекс.Видео">
-    <meta property="og:type" content="video">
-    <meta property="og:video" content="http://www.youtube.com/embed/Fug5buDTHdY">
-    <meta property="og:video:secure_url" content="https://www.youtube.com/embed/Fug5buDTHdY">
-    <meta property="og:video:type" content="text/html">
-    <meta property="og:duration" content="18:49">
+        .side-button > div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+        }
 
+        .side-button.side-button_left > div{
+            left: 0;
+        }
+
+        .side-button.side-button_right > div{
+            right: 0;
+        }
+
+        .side-button > div.side-button__1{
+            top: 150px;
+        }
+
+        .side-button > div.side-button__2{
+            top: 300px;
+        }
+
+        .side-button > div.side-button__3{
+            top: 450px;
+        }
+
+        .side-button > div.side-button__4{
+            top: 600px;
+        }
+
+        .keyboard{
+            position: absolute;
+            top: 150px;
+            left: 150px;
+        }
+
+        .keyboard > div{
+            position: absolute;
+            width: 120px;
+            height: 100px;
+            background-color: #ccc;
+        }
+
+        .keyboard > div.keyboard__1,
+        .keyboard > div.keyboard__2,
+        .keyboard > div.keyboard__3,
+        .keyboard > div.keyboard__A1{
+            top: 0px;
+        }
+
+        .keyboard > div.keyboard__4,
+        .keyboard > div.keyboard__5,
+        .keyboard > div.keyboard__6,
+        .keyboard > div.keyboard__A2{
+            top: 150px;
+        }
+
+        .keyboard > div.keyboard__7,
+        .keyboard > div.keyboard__8,
+        .keyboard > div.keyboard__9,
+        .keyboard > div.keyboard__A3{
+            top: 300px;
+        }
+
+        .keyboard > div.keyboard__M,
+        .keyboard > div.keyboard__0,
+        .keyboard > div.keyboard__P,
+        .keyboard > div.keyboard__A4{
+            top: 450px;
+        }
+
+        .keyboard > div.keyboard__1,
+        .keyboard > div.keyboard__4,
+        .keyboard > div.keyboard__7,
+        .keyboard > div.keyboard__M{
+            left: 0px;
+        }
+
+        .keyboard > div.keyboard__2,
+        .keyboard > div.keyboard__5,
+        .keyboard > div.keyboard__8,
+        .keyboard > div.keyboard__0{
+            left: 150px;
+        }
+
+        .keyboard > div.keyboard__3,
+        .keyboard > div.keyboard__6,
+        .keyboard > div.keyboard__9,
+        .keyboard > div.keyboard__P{
+            left: 300px;
+        }
+
+        .keyboard > div.keyboard__A1,
+        .keyboard > div.keyboard__A2,
+        .keyboard > div.keyboard__A3,
+        .keyboard > div.keyboard__A4{
+            left: 450px;
+            width: 300px;
+        }
+
+        .button_select{
+            background-color: #f0f!important;
+        }
+
+        .buttonLog{
+            position: absolute;
+            top:10px;
+            left:10px;
+            font-family: Arial;
+            font-size: 20px;
+            color: #f0f;
+        }
+    </style>
 </head>
-<body style="">
-    Meta Page
+<body>
+    <div class="container">
+        <div class="keyboard">
+            <div class="keyboard__1"></div>
+            <div class="keyboard__2"></div>
+            <div class="keyboard__3"></div>
+            <div class="keyboard__4"></div>
+            <div class="keyboard__5"></div>
+            <div class="keyboard__6"></div>
+            <div class="keyboard__7"></div>
+            <div class="keyboard__8"></div>
+            <div class="keyboard__9"></div>
+            <div class="keyboard__0"></div>
+            <div class="keyboard__P"></div>
+            <div class="keyboard__M"></div>
+            <div class="keyboard__A1"></div>
+            <div class="keyboard__A2"></div>
+            <div class="keyboard__A3"></div>
+            <div class="keyboard__A4"></div>
+        </div>
+        <div class="side-button side-button_left">
+            <div class="side-button__1"></div>
+            <div class="side-button__2"></div>
+            <div class="side-button__3"></div>
+            <div class="side-button__4"></div>
+        </div>
+        <div class="side-button side-button_right">
+            <div class="side-button__1"></div>
+            <div class="side-button__2"></div>
+            <div class="side-button__3"></div>
+            <div class="side-button__4" data-key="65"></div>
+        </div>
+        <div class="buttonLog"></div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var keys = {};
+
+            $(document).keydown(function(e) {
+                $('.buttonLog').html(e.keyCode)
+                keys[e.keyCode].addClass('button_select')
+            });
+
+            $(document).keyup(function(e) {
+                keys[e.keyCode].removeClass('button_select');
+            });
+
+            $('div[data-key]').each(function (i, v) {
+                keys[$(v).data().key] = $(v);
+            })
+        });
+    </script>
 </body>
 </html>
