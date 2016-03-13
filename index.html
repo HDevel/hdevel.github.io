@@ -174,8 +174,9 @@
             var keys = {};
 
             $(document).keydown(function(e) {
-                console.log(1)
-                $('.buttonLog').html(e.keyCode)
+
+//                console.log(e.originalEvent.keyIdentifier);
+                $('.buttonLog').html(e.originalEvent.keyIdentifier)
                 keys[e.keyCode].addClass('button_select')
             });
 
