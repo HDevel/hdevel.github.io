@@ -175,12 +175,12 @@
 
             $(document).keydown(function(e) {
                 console.log(e);
-                $('.buttonLog').html(e.keyCode);
-                keys[e.keyCode].addClass('button_select')
+                $('.buttonLog').html(e.key);
+                keys[e.key].addClass('button_select')
             });
 
             $(document).keyup(function(e) {
-                keys[e.keyCode].removeClass('button_select');
+                keys[e.key].removeClass('button_select');
             });
 
             $('div[data-key]').each(function (i, v) {
