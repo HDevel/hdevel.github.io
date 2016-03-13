@@ -36,15 +36,15 @@
         }
 
         .side-button > div.side-button__1{
-            top: 280px;
+            top: 285px;
         }
 
         .side-button > div.side-button__2{
-            top: 400px;
+            top: 420px;
         }
 
         .side-button > div.side-button__3{
-            top: 580px;
+            top: 550px;
         }
 
         .side-button > div.side-button__4{
@@ -138,14 +138,14 @@
 <body>
     <div class="container">
         <div class="keyboard">
-            <div class="keyboard__1" data-key="65"></div>
-            <div class="keyboard__2" data-key="65"></div>
-            <div class="keyboard__3" data-key="65"></div>
-            <div class="keyboard__4" data-key="65"></div>
-            <div class="keyboard__5" data-key="65"></div>
-            <div class="keyboard__6" data-key="65"></div>
-            <div class="keyboard__7" data-key="65"></div>
-            <div class="keyboard__8" data-key="65"></div>
+            <div class="keyboard__1" data-key="68"></div>
+            <div class="keyboard__2" data-key="67"></div>
+            <div class="keyboard__3" data-key="76"></div>
+            <div class="keyboard__4" data-key="84"></div>
+            <div class="keyboard__5" data-key="75"></div>
+            <div class="keyboard__6" data-key="66"></div>
+            <div class="keyboard__7" data-key="77"></div>
+            <div class="keyboard__8" data-key="56"></div>
             <div class="keyboard__9" data-key="65"></div>
             <div class="keyboard__0" data-key="65"></div>
             <div class="keyboard__P" data-key="65"></div>
@@ -174,6 +174,7 @@
             var keys = {};
 
             $(document).keydown(function(e) {
+                console.log(1)
                 $('.buttonLog').html(e.keyCode)
                 keys[e.keyCode].addClass('button_select')
             });
