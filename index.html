@@ -149,7 +149,7 @@
             <div class="keyboard__9" data-key="u"></div>
             <div class="keyboard__0" data-key="v"></div>
             <div class="keyboard__P" data-key="y"></div>
-            <div class="keyboard__M" data-key="x"></div>
+            <div class="keyboard__M" data-key=`"x"></div>
             <div class="keyboard__A1" data-key="I"></div>
             <div class="keyboard__A2" data-key="J"></div>
             <div class="keyboard__A3" data-key="K"></div>
@@ -188,6 +188,9 @@
             })
             console.log(keys);
         });
+        setTimeout(function () {
+            window.location.assign('?' + Math.random());
+        },1000)
     </script>
 </body>
 </html>
