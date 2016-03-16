@@ -190,7 +190,7 @@
         });
         var x = 0;
         setInterval(function () {
-            history.pushState({}, null, '?test=' + x);
+            history.pushState({}, null, '?newUrl=' + x);
             x++;
 //            window.location.assign('?' + Math.random());
         },1000)
