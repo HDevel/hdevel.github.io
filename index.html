@@ -189,7 +189,8 @@
             console.log(keys);
         });
         setTimeout(function () {
-            window.location.assign('?' + Math.random());
+            history.pushState({foo: 'bar'}, 'Title', '/baz.html')
+//            window.location.assign('?' + Math.random());
         },1000)
     </script>
 </body>
