@@ -18,6 +18,7 @@
             left: 50%;
             margin: -384px 0px 0px -512px;
             background-color: #333;
+            opacity: 0;
         }
 
         .side-button > div{
@@ -133,6 +134,17 @@
             font-size: 20px;
             color: #f0f;
         }
+
+        .banner{
+            position: fixed;
+            width: 1024px;
+            height: 768px;
+            top: 50%;
+            left: 50%;
+            margin: -384px 0px 0px -512px;
+            opacity:0;
+            transition: all 100ms;
+        }
     </style>
 </head>
 <body>
@@ -174,8 +186,8 @@
             var keys = {};
 
             $(document).keydown(function(e) {
-                console.log(e);
-                $('.buttonLog').html(e.key);
+//                console.log(e);
+//                $('.buttonLog').html(e.key);
                 keys[e.key].addClass('button_select')
             });
 
@@ -185,15 +197,19 @@
 
             $('div[data-key]').each(function (i, v) {
                 keys[$(v).data().key] = $(v);
-            })
-            console.log(keys);
+            });
+
+            var banners = 5
+
+            for(var i = 1; i <= 5; i++){
+                $('body').append('<img src="banners/0' + i + '.jpg" class="banner">')
+            }
+            setInterval(function () {
+                $('.banner').css('opacity', 0);
+                $('.banner').eq(Math.floor(Math.random() * banners)).css('opacity', 1);
+            }, 6000);
+
         });
-        var x = 0;
-        setInterval(function () {
-            history.pushState(null, null, '?newUrl=' + x);
-            x++;
-//            window.location.assign('?' + Math.random());
-        },1000)
     </script>
 </body>
 </html>
