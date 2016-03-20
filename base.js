@@ -36,9 +36,14 @@ if(navigator.userAgent.match('Macintosh')){
 
 var returnToAd = function () {
     if(!document.URL.match('/ad/index.html')){
-        location.assign('../ad/index.html?' + Math.random());
+        toUrl('../ad/index.html');
     }
 };
+
+function toUrl(url){
+    location.assign(url + '?' + Math.random());
+}
+
 var timeoutToAd = setTimeout(returnToAd, 5 * 1000);
 
 $(document).ready(function() {
