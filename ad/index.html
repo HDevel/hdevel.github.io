@@ -1,0 +1,51 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>B</title>
+    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="../base.js"></script>
+    <style>
+        body,
+        html{
+            overflow: hidden;
+        }
+
+        .banner{
+            position: fixed;
+            width: 1024px;
+            height: 768px;
+            top: 50%;
+            left: 50%;
+            margin: -384px 0px 0px -512px;
+            opacity:0;
+            transition: all 100ms;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var banners = 5
+
+        $(document).ready(function() {
+
+            for(var i = 1; i <= banners; i++){
+                $('body').append('<img src="banners/0' + i + '.jpg" class="banner">')
+            }
+            setInterval(selectBanner, 6000);
+            selectBanner();
+        });
+
+        function selectBanner() {
+            $('.banner').css('opacity', 0);
+            $('.banner').eq(Math.floor(Math.random() * banners)).css('opacity', 1);
+        };
+
+        var callbacks = {
+            down_all: function (id) {
+                location.assign('../keys/index.html')
+            }
+        }
+    </script>
+</body>
+</html>
