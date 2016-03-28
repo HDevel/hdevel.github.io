@@ -28,7 +28,12 @@ var keysEnum = {
         right_4: ['H', 'n']
     },
     keysMap = {},
-    keyVariant = 0;
+    keyVariant = 0,
+    callbacks = {
+        action_1_down: function () {
+            toUrl('../ad/index.html');
+        }
+    }
 
 if(navigator.userAgent.match('Macintosh')){
     keyVariant = 1;
@@ -67,7 +72,7 @@ $(document).ready(function() {
             callbacks[ keysMap[e.key] + '_up' ] && callbacks[ keysMap[e.key] + '_up' ]()
         }
         clearTimeout(timeoutToAd);
-        timeoutToAd = setTimeout(returnToAd, 5 * 1000);
+        timeoutToAd = setTimeout(returnToAd, 120 * 1000);
     });
 
     //трансформация enum в клавиша-карта
