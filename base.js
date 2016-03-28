@@ -49,7 +49,7 @@ function toUrl(url){
     location.assign(url + '?' + Math.random());
 }
 
-var timeoutToAd = setTimeout(returnToAd, 10 * 1000);
+var timeoutToAd = setTimeout(returnToAd, 240 * 1000);
 
 $(document).ready(function() {
     $(document).keydown(function(e) {
@@ -72,7 +72,7 @@ $(document).ready(function() {
             callbacks[ keysMap[e.key] + '_up' ] && callbacks[ keysMap[e.key] + '_up' ]()
         }
         clearTimeout(timeoutToAd);
-        timeoutToAd = setTimeout(returnToAd, 120 * 1000);
+        timeoutToAd = setTimeout(returnToAd, 240 * 1000);
     });
 
     //трансформация enum в клавиша-карта
