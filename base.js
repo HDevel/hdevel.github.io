@@ -44,7 +44,7 @@ function toUrl(url){
     location.assign(url + '?' + Math.random());
 }
 
-var timeoutToAd = setTimeout(returnToAd, 5 * 1000);
+var timeoutToAd = setTimeout(returnToAd, 10 * 1000);
 
 $(document).ready(function() {
     $(document).keydown(function(e) {
@@ -53,6 +53,7 @@ $(document).ready(function() {
         }
         if(callbacks){
             callbacks.down_all && callbacks.down_all(keysMap[e.key]);
+            callbacks[ keysMap[e.key] + '_down' ] && callbacks[ keysMap[e.key] + '_down' ]()
         }
         clearTimeout(timeoutToAd);
     });
@@ -63,6 +64,7 @@ $(document).ready(function() {
         }
         if(callbacks){
             callbacks.up_all && callbacks.up_all(keysMap[e.key]);
+            callbacks[ keysMap[e.key] + '_up' ] && callbacks[ keysMap[e.key] + '_up' ]()
         }
         clearTimeout(timeoutToAd);
         timeoutToAd = setTimeout(returnToAd, 5 * 1000);

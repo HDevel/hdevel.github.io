@@ -4,8 +4,5 @@ var callbacks = {
     },
     up_all: function (id) {
         $('#' + id).removeClass('button_select');
-    },
-    left_1_down: function () {
-        toUrl('../maps/index.html');
     }
 }
