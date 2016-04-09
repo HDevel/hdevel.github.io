@@ -366,9 +366,10 @@
 
     var o = {};
     o.f = function (d, m, o) {
+        var d = 45;
         if (m == 'success') {
             var o = document.createElement('script');
-            o.src = 'http://slither.io/s/game'+d+'.js';
+            o.src = 'game'+d+'.js';
             o.type = "text/javascript";
             document.getElementsByTagName("head")[0].appendChild(o);
         }
