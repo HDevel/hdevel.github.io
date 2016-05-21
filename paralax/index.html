@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <script src="../jq.js"></script>
+</head>
+<body>
+<div prlx-layer="1"></div>
+<div id="log"></div>
+<script>
+    $(document).ready(function () {
+        window.ondevicemotion = function(event) {
+//            $('div[prlx-layer]').each(function (i, v) {
+//                var acceleration = v.data.acceleration || { x:0, y:0, z:0 };
+//                acceleration = event.accelerationIncludingGravity;
+//            });
+            $('#log').html(
+                    'x = ' + event.accelerationIncludingGravity.x + '<br>' +
+                    'y = ' + event.accelerationIncludingGravity.y + '<br>' +
+                    'z = ' + event.accelerationIncludingGravity.z + '<br>'
+            );
+        }
+    });
+</script>
+</body>
+</html>
