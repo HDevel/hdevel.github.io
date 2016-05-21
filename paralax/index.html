@@ -5,21 +5,35 @@
     <script src="../jq.js"></script>
 </head>
 <body>
+<style>
+    div[prlx-layer]{
+        width:100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -50px 0 0 -50px;
+        background-color: #f0f;
+    }
+</style>
 <div prlx-layer="1"></div>
 <div id="log"></div>
 <script>
     $(document).ready(function () {
         window.ondevicemotion = function(event) {
-//            $('div[prlx-layer]').each(function (i, v) {
-//                var acceleration = v.data.acceleration || { x:0, y:0, z:0 };
-//                acceleration = event.accelerationIncludingGravity;
-//            });
-            $('#log').html(
-                    'Rx = ' + event.rotationRate.alpha.toFixed(2) + '<br>' +
-                    'Ry = ' + event.rotationRate.beta.toFixed(2) + '<br>' +
-                    'Rz = ' + event.rotationRate.gamma.toFixed(2) + '<br>' +
-                    ''
-            );
+            $('div[prlx-layer]').each(function (i, v) {
+                v.acc = v.acc || { alpha: 0, beta: 0, gamma: 0 }
+                v.acc.alpha += event.rotationRate.alpha;
+                v.acc.beta += event.rotationRate.beta;
+                v.acc.gamma += event.rotationRate.gamma;
+                $(v).css('transform', 'translate(' + (v.acc.beta) + 'px, ' + (v.acc.alpha) + 'px)')
+            });
+//            $('#log').html(
+//                    'Rx = ' + event.rotationRate.alpha.toFixed(2) + '<br>' +
+//                    'Ry = ' + event.rotationRate.beta.toFixed(2) + '<br>' +
+//                    'Rz = ' + event.rotationRate.gamma.toFixed(2) + '<br>' +
+//                    ''
+//            );
         }
     });
 </script>
