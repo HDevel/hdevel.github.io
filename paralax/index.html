@@ -15,19 +15,10 @@
 //                acceleration = event.accelerationIncludingGravity;
 //            });
             $('#log').html(
-                    'IGx = ' + JSON.stringify(event) + '<br>'
-//                    'IGx = ' + event.accelerationIncludingGravity.x + '<br>' +
-//                    'IGy = ' + event.accelerationIncludingGravity.y + '<br>' +
-//                    'IGz = ' + event.accelerationIncludingGravity.z + '<br>' +
-////                    '<br>' +
-////                    'Gx = ' + event.accelerationGravity.x + '<br>' +
-////                    'Gy = ' + event.accelerationGravity.y + '<br>' +
-////                    'Gz = ' + event.accelerationGravity.z + '<br>'
-//                    '<br>' +
-//                    'Rx = ' + event.rotationRate.alpha + '<br>' +
-//                    'Ry = ' + event.rotationRate.beta + '<br>' +
-//                    'Rz = ' + event.rotationRate.gamma + '<br>' +
-//                    ''
+                    'Rx = ' + event.rotationRate.alpha.toFixed(2) + '<br>' +
+                    'Ry = ' + event.rotationRate.beta.toFixed(2) + '<br>' +
+                    'Rz = ' + event.rotationRate.gamma.toFixed(2) + '<br>' +
+                    ''
             );
         }
     });
