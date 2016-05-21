@@ -28,7 +28,7 @@
 
                 ['alpha', 'beta', 'gamma'].forEach(function (direction) {
                     v.acc[direction] += event.rotationRate[direction];
-                    v.acc[direction] += v.acc[direction] < 0 ? 1 : -1;
+                    v.acc[direction] += v.acc[direction] < 0 ? 5 : -5;
                 });
 
                 v.acc.layer = parseInt($(v).attr('prlx-layer')) / 1000;
