@@ -33,7 +33,7 @@
                 });
 
                 v.acc.layer = parseInt($(v).attr('prlx-layer')) / 1000;
-                $(v).css('transform', 'translate(' + (v.acc.beta * v.acc.layer) + 'px, ' + (v.acc.alpha * v.acc.layer) + 'px) rotate(' + -(v.acc.gamma * 0.1) + 'deg)')
+                $(v).css('transform', 'translate(' + (v.acc.beta * v.acc.layer) + 'px, ' + (v.acc.alpha * v.acc.layer) + 'px) rotate(' + -(v.acc.gamma * 0.01) + 'deg)')
             });
 //            $('#log').html(
 //                    'Rx = ' + event.rotationRate.alpha.toFixed(2) + '<br>' +
