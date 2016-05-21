@@ -22,11 +22,15 @@
     $(document).ready(function () {
         window.ondevicemotion = function(event) {
             $('div[prlx-layer]').each(function (i, v) {
-                v.acc = v.acc || { alpha: 0, beta: 0, gamma: 0 }
-                v.acc.alpha += event.rotationRate.alpha;
-                v.acc.beta += event.rotationRate.beta;
-                v.acc.gamma += event.rotationRate.gamma;
-                $(v).css('transform', 'translate(' + (v.acc.beta) + 'px, ' + (v.acc.alpha) + 'px)')
+                v.acc = v.acc || { alpha: 0, beta: 0, gamma: 0 };
+
+                ['alpha', 'beta', 'gamma'].forEach(function (direction) {
+                    v.acc[direction] += event.rotationRate[direction];
+                    v.acc[direction] += v.acc[direction] < 0 ? 1 : -1;
+                });
+
+                v.acc.layer = parseInt($(v).attr('prlx-layer')) / 100;
+                $(v).css('transform', 'translate(' + (v.acc.beta * v.acc.layer) + 'px, ' + (v.acc.alpha * v.acc.layer) + 'px)')
             });
 //            $('#log').html(
 //                    'Rx = ' + event.rotationRate.alpha.toFixed(2) + '<br>' +
