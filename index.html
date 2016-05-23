@@ -5,52 +5,11 @@
     <title>B</title>
     <script src="jq.js"></script>
     <script src="base.js"></script>
-    <style>
-        body,
-        html{
-            overflow: hidden;
-        }
-
-        .banner{
-            position: fixed;
-            width: 1024px;
-            height: 768px;
-            top: 50%;
-            left: 50%;
-            margin: -384px 0px 0px -512px;
-            opacity:0;
-            transition: all 100ms;
-        }
-    </style>
 </head>
 <body>
     <script>
         $(document).ready(function() {
-            var keys = {};
-
-            $(document).keydown(function(e) {
-//                console.log(e);
-//                $('.buttonLog').html(e.key);
-                keys[e.key].addClass('button_select')
-            });
-
-            $(document).keyup(function(e) {
-                keys[e.key].removeClass('button_select');
-            });
-
-            $('div[data-key]').each(function (i, v) {
-                keys[$(v).data().key] = $(v);
-            });
-
-            var banners = 5
-
-            for(var i = 1; i <= 5; i++){
-                $('body').append('<img src="banners/0' + i + '.jpg" class="banner">')
-            }
-            setInterval(function () {
-                $('.banner').css('opacity', 0);
-                $('.banner').eq(Math.floor(Math.random() * banners)).css('opacity', 1);
-            }, 6000);
+            returnToAd('ad');
         });
     </script>
 </body>

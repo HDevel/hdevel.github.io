@@ -39,9 +39,9 @@ if(navigator.userAgent.match('Macintosh')){
     keyVariant = 1;
 }
 
-var returnToAd = function () {
+var returnToAd = function (url) {
     if(!document.URL.match('/ad/index.html')){
-        toUrl('../ad/index.html');
+        toUrl(url || '../ad/index.html');
     }
 };
 
