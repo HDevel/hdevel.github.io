@@ -8,14 +8,17 @@
 <input type="text">
 <script>
     $(document).ready(function () {
+        log(window.innerWidth, window.innerHeight);
         $(window).on('resize', function(){
-            $('body').append('<br> window.innerHeight = ' + window.innerHeight);
-            $('body').append('<br> window.innerWidth = ' + window.innerWidth);
-//            var win = $(this); //this = window
-//            if (win.height() >= 820) { /* ... */ }
-//            if (win.width() >= 1280) { /* ... */ }
+            log(window.innerWidth, window.innerHeight);
         });
     });
+
+    function log(w, h){
+        $('body').append('<br> window.innerWidth = ' + w);
+        $('body').append('<br> window.innerHeight = ' + h);
+        $('body').append('<br>----------------------------');
+    }
 </script>
 </body>
 </html>
