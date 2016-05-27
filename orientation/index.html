@@ -36,7 +36,10 @@
     function log(w, h, o){
         $('body').append('<br> window.innerWidth = ' + w);
         $('body').append('<br> window.innerHeight = ' + h);
-        $('body').append('<br> window.innerHeight = ' + o);
+        $('body').append('<br> orient = ' + o);
+        $('body').append('<br> screen.width = ' + screen.width);
+        $('body').append('<br> screen.height = ' + screen.height);
+        $('body').append('<br> window.devicePixelRatio = ' + window.devicePixelRatio);
         $('body').append('<br>----------------------------');
     }
 </script>
