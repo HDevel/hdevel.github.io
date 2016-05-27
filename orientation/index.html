@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <script src="../jq.js"></script>
+</head>
+<body>
+<input type="text">
+<script>
+    $(document).ready(function () {
+        $(window).on('resize', function(){
+            $('body').append('<br> window.innerHeight = ' + window.innerHeight);
+            $('body').append('<br> window.innerWidth = ' + window.innerWidth);
+//            var win = $(this); //this = window
+//            if (win.height() >= 820) { /* ... */ }
+//            if (win.width() >= 1280) { /* ... */ }
+        });
+    });
+</script>
+</body>
+</html>
