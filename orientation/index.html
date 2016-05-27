@@ -36,6 +36,8 @@
     function log(w, h, o){
         $('body').append('<br> window.innerWidth = ' + w);
         $('body').append('<br> window.innerHeight = ' + h);
+        $('body').append('<br> window.outerWidth = ' + window.outerWidth);
+        $('body').append('<br> window.outerHeight = ' + window.outerHeight);
         $('body').append('<br> orient = ' + o);
         $('body').append('<br> screen.width = ' + screen.width);
         $('body').append('<br> screen.height = ' + screen.height);
