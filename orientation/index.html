@@ -8,16 +8,36 @@
 <body>
 <input type="text">
 <script>
+    lastOrient = '1';
+    lastWidth = 1;
+
+
     $(document).ready(function () {
         log(window.innerWidth, window.innerHeight);
+
+
+
+
         $(window).on('resize', function(){
-            log(window.innerWidth, window.innerHeight);
+            setTimeout(function() {
+                var width = window.innerWidth,
+                        height = window.innerHeight,
+                        landscape = (width > height);
+
+                if (landscape !== lastOrient && width !== lastWidth) {
+                    log(window.innerWidth, window.innerHeight, landscape);
+
+                    lastOrient = landscape;
+                    lastWidth = width;
+                }
+            }, 400);
         });
     });
 
-    function log(w, h){
+    function log(w, h, o){
         $('body').append('<br> window.innerWidth = ' + w);
         $('body').append('<br> window.innerHeight = ' + h);
+        $('body').append('<br> window.innerHeight = ' + o);
         $('body').append('<br>----------------------------');
     }
 </script>
