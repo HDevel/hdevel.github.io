@@ -13,7 +13,7 @@
 
 
     $(document).ready(function () {
-        log(window.innerWidth, window.innerHeight);
+//        log(window.innerWidth, window.innerHeight);
 
 
 
@@ -24,9 +24,8 @@
                         height = window.innerHeight,
                         landscape = (width > height);
 
+                log(width, height, landscape);
                 if (landscape !== lastOrient && width !== lastWidth) {
-                    log(window.innerWidth, window.innerHeight, landscape);
-
                     lastOrient = landscape;
                     lastWidth = width;
                 }
