@@ -738,10 +738,10 @@ input.button {
 }
 
 #more6 {
-    -webkit-transition: all .6s;
-    -moz-transition: all .6s;
-    -o-transition: all .6s;
-    transition: all .6s;
+    -webkit-transition: all .6s linear;
+    -moz-transition: all .6s linear;
+    -o-transition: all .6s linear;
+    transition: all .6s linear;
     display: none;
     overflow: hidden;
 }
