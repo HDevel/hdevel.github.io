@@ -499,7 +499,9 @@ input.button {
 .screenZoom {
     position: absolute;
     width: 100%;
-    height: 100%
+    height: 100%;
+    background: #161616 no-repeat 50% 50%;
+    background-size: auto 100%
 }
 
 .appearedScreen {
@@ -548,45 +550,37 @@ input.button {
 
 /*@media(max-width:767px){.content{padding:30px 5px}}*/
 #screen1 .screenZoom {
-    background: #161616 url(../img/bgScreen1.jpg) no-repeat 50% 50%;
-    background-size: auto 100%
+    background-image: url(../img/bgScreen1.jpg);
 }
 
 #screen3 .screenZoom {
-    background: #161616 url(../img/bgScreen3.jpg) no-repeat 50% 50%;
-    background-size: auto 100%
+    background-image: url(../img/bgScreen3.jpg);
 }
 
 #screen5 .screenZoom {
-    background: #161616 url(../img/bgScreen5.jpg) no-repeat 50% 50%;
-    background-size: auto 100%
+    background-image: url(../img/bgScreen5.jpg);
 }
 
 #screen7 .screenZoom {
-    background: #161616 url(../img/bgScreen7.jpg) no-repeat 50% 50%;
-    background-size: auto 100%
+    background-image: url(../img/bgScreen7.jpg);
 }
 
 /* ретина */
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
     #screen1 .screenZoom {
-        background: #161616 url(../img/bgScreen1X2.jpg) no-repeat 50% 50%;
-        background-size: auto 100%
+        background-image: url(../img/bgScreen1X2.jpg);
     }
 
     #screen3 .screenZoom {
-        background: #161616 url(../img/bgScreen3X2.jpg) no-repeat 50% 50%;
-        background-size: auto 100%
+        background-image: url(../img/bgScreen3X2.jpg);
     }
 
     #screen5 .screenZoom {
-        background: #161616 url(../img/bgScreen5X2.jpg) no-repeat 50% 50%;
-        background-size: auto 100%
+        background-image: url(../img/bgScreen5X2.jpg);
     }
 
     #screen7 .screenZoom {
-        background: #161616 url(../img/bgScreen7X2.jpg) no-repeat 50% 50%;
-        background-size: auto 100%
+        background-image: url(../img/bgScreen7X2.jpg);
     }
 }
 
