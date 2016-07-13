@@ -30,78 +30,6 @@
 }
 
 /* ANIMATION */
-@keyframes memberIn {
-    from {
-        opacity: 0
-    }
-    to {
-        opacity: 1
-    }
-}
-
-@-webkit-keyframes memberIn {
-    from {
-        opacity: 1
-    }
-    to {
-        opacity: 0
-    }
-}
-
-@keyframes memberOut {
-    from {
-        opacity: 1
-    }
-    to {
-        opacity: 0
-    }
-}
-
-@-webkit-keyframes memberOut {
-    from {
-        opacity: 1
-    }
-    to {
-        opacity: 0
-    }
-}
-
-@keyframes memberImgIn {
-    from {
-        transform: scale(1)
-    }
-    to {
-        transform: scale(1.1)
-    }
-}
-
-@-webkit-keyframes memberImgIn {
-    from {
-        transform: scale(1)
-    }
-    to {
-        transform: scale(1.1)
-    }
-}
-
-@keyframes memberImgOut {
-    from {
-        transform: scale(1.1)
-    }
-    to {
-        transform: scale(1)
-    }
-}
-
-@-webkit-keyframes memberImgOut {
-    from {
-        transform: scale(1.1)
-    }
-    to {
-        transform: scale(1)
-    }
-}
-
 @keyframes arrowUpDown {
     from {
         opacity: .2
@@ -989,7 +917,7 @@ input.button {
 
 .member {
     position: relative;
-    width: calc(25%);
+    width: 25%;
     float: left;
     z-index: 1;
     overflow: hidden
@@ -1013,8 +941,11 @@ input.button {
     width: 100%;
     height: 100%;
     transform: scale(1);
-    animation: memberImgOut .6s;
-    -webkit-animation: memberImgOut .6s
+
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
 }
 
 .member:hover img {
@@ -1022,23 +953,22 @@ input.button {
 }
 
 .member .table {
-    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
-    -webkit-logical-height: calc(100% + 1px);
-    -webkit-logical-width: calc(100% + 1px);
-    padding: 10px;
     z-index: 3;
     background: rgba(0, 0, 0, .65);
-    color: #fff;
     opacity: 0;
     font-size: 22px;
     letter-spacing: 1.3px;
     color: #efefef;
-    animation: memberOut .6s;
-    -webkit-animation: memberOut .6s
+
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
 }
 
 .member .table strong {
@@ -1046,15 +976,7 @@ input.button {
 }
 
 .member:hover .table {
-    animation: memberIn .6s;
-    -webkit-animation: memberIn .6s;
     opacity: 1
-}
-
-.member:hover img {
-    animation: memberImgIn .6s;
-    -webkit-animation: memberImgIn .6s;
-    transform: scale(1.1)
 }
 
 /* SCREEN 7 */
