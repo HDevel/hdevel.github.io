@@ -55,52 +55,42 @@ $(window).load(function () {
 				$(".vibrano", elem).delay(300).fadeIn(200);
 			}
 		}
+
+		var yesNoSlide = $("#yesNoSlide");
+
+		yesNoSlide.is(':hidden') && yesNoSlide.height(0);
+		yesNoSlide.show();
+
+		$("[sinc]").each(function(){
+			if ($(this).attr("sinc") != "yes" && $(this).attr("sinc") != "no"){
+				$(this).removeClass("active").prop("checked", false);
+			}
+		});
+
+		$("#screen5 .content").css('border-color', 'transparent');
+
+		setTimeout(function () {
+			yesNoSlide.height(yesNoSlide[0].scrollHeight);
+		}, 1000);
+
+
+		$("#screen5").css('padding', '0');
+		$("#screen5 .content").css('margin', '0 auto');
+
 		if(elemId == "yes"){
-			$("[sinc]").each(function(){
-				if ($(this).attr("sinc") != "yes" && $(this).attr("sinc") != "no"){
-					$(this).removeClass("active").prop("checked", false);
-				}
-			});
 			$("[sinc='yes']").prop("checked", true).val("Есть база").addClass("active");
 			$("[sinc='no']").removeClass("active");
-			$("#screen5 .content").animate({borderColor: "transparent"}, function(){
-				$(".blockYesNo").fadeOut(300);
-				$("#blockYes").delay(300).fadeIn(300);
-				$("#yesNoSlide").slideDown(600, function(){
-					var yesNoHeight = Math.max.apply(null, $(".blockYesNo").map(function () {
-						return $(this).innerHeight();
-					}).get());
-					$("#yesNoHeight").height(yesNoHeight);
-					$(".blockYesNo").each(function(){
-						$(this).css({left: ($("#yesNoHeight").width() - $(this).width())*0.5});
-					});
-				});
-				$("#screen5").animate({padding:0});
-				$("#screen5 .content").animate({margin:"0 auto"});
-			});
+
+			$("#blockYes").show();
+			$("#blockNo").hide();
 
 		}
 		if(elemId == "no"){
-			$("[sinc]").each(function(){
-				if ($(this).attr("sinc") != "yes" && $(this).attr("sinc") != "no"){
-					$(this).removeClass("active").prop("checked", false);
-				}
-			});
 			$("[sinc='yes']").prop("checked", true).val("Нет базы").addClass("active");
 			$("[sinc='yes']").removeClass("active");
-			$(".blockYesNo").fadeOut(300);
-			$("#blockNo").delay(300).fadeIn(300);
-			$("#yesNoSlide").slideDown(600, function(){
-				var yesNoHeight = Math.max.apply(null, $(".blockYesNo").map(function () {
-					return $(this).innerHeight();
-				}).get());
-				$("#yesNoHeight").height(yesNoHeight);
-				$(".blockYesNo").each(function(){
-					$(this).css({left: ($("#yesNoHeight").width() - $(this).width())*0.5});
-				});
-			});
-			$("#screen5").animate({padding:0});
-			$("#screen5 .content").animate({borderColor: "transparent"});
+
+			$("#blockNo").show();
+			$("#blockYes").hide();
 		}
 	}
 	$(".popupFrameMore").click(function(){

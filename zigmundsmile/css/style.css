@@ -764,13 +764,22 @@ input.button {
 
 /* SCREEN 5 */
 #screen5 {
-    min-width: 740px
+    min-width: 740px;
+    -webkit-transition: padding .6s;
+    -moz-transition: padding .6s;
+    -o-transition: padding .6s;
+    transition: padding .6s;
 }
 
 #screen5 .content {
     padding: 130px 15px;
     margin: 130px auto;
-    max-width: 1100px
+    max-width: 1100px;
+
+    -webkit-transition: margin .6s;
+    -moz-transition: margin .6s;
+    -o-transition: margin .6s;
+    transition: margin .6s;
 }
 
 #screen5 p {
@@ -820,10 +829,6 @@ input.button {
     color: #101010
 }
 
-.blockYesNo {
-    position: absolute;
-    top: 0
-}
 
 .more:hover {
     background: #f2ca80;
@@ -895,7 +900,16 @@ input.button {
 }
 
 #yesNoSlide {
-    display: none
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
+    display: none;
+    overflow: hidden;
+}
+
+#blockYes {
+    display: block;
 }
 
 #yesNoHeight {
