@@ -429,7 +429,7 @@ input.button {
     width: 100%;
     height: 100%;
     background: #161616 no-repeat 50% 50%;
-    background-size: auto 100%
+    background-size: cover
 }
 
 .appearedScreen {
@@ -478,37 +478,37 @@ input.button {
 
 /*@media(max-width:767px){.content{padding:30px 5px}}*/
 #screen1 .screenZoom {
-    background-image: url(../img/bgScreen1.jpg);
+    background-image: url(http://zigmundsmile.ru/img/bgScreen1.jpg);
 }
 
 #screen3 .screenZoom {
-    background-image: url(../img/bgScreen3.jpg);
+    background-image: url(http://zigmundsmile.ru/img/bgScreen3.jpg);
 }
 
 #screen5 .screenZoom {
-    background-image: url(../img/bgScreen5.jpg);
+    background-image: url(http://zigmundsmile.ru/img/bgScreen5.jpg);
 }
 
 #screen7 .screenZoom {
-    background-image: url(../img/bgScreen7.jpg);
+    background-image: url(http://zigmundsmile.ru/img/bgScreen7.jpg);
 }
 
 /* ретина */
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
     #screen1 .screenZoom {
-        background-image: url(../img/bgScreen1X2.jpg);
+        background-image: url(http://zigmundsmile.ru/img/bgScreen1X2.jpg);
     }
 
     #screen3 .screenZoom {
-        background-image: url(../img/bgScreen3X2.jpg);
+        background-image: url(http://zigmundsmile.ru/img/bgScreen3X2.jpg);
     }
 
     #screen5 .screenZoom {
-        background-image: url(../img/bgScreen5X2.jpg);
+        background-image: url(http://zigmundsmile.ru/img/bgScreen5X2.jpg);
     }
 
     #screen7 .screenZoom {
-        background-image: url(../img/bgScreen7X2.jpg);
+        background-image: url(http://zigmundsmile.ru/img/bgScreen7X2.jpg);
     }
 }
 
@@ -1466,7 +1466,7 @@ input.button {
 #frameContent #footer {
     padding: 50px 100px;
     background: #101010;
-    background: #161616 url(../img/bgUslugi.jpg) no-repeat center bottom;
+    background: #161616 url(http://zigmundsmile.ru/img/bgUslugi.jpg) no-repeat center bottom;
     background-size: cover
 }
 
@@ -1583,7 +1583,7 @@ input.button {
 /* WELCOME */
 .welcome {
     height: 100%;
-    background: #101010 url(../img/welcomeBg.jpg) no-repeat center bottom;
+    background: #101010 url(http://zigmundsmile.ru/img/welcomeBg.jpg) no-repeat center bottom;
     background-size: cover
 }
 
@@ -1629,7 +1629,7 @@ input.button {
 
 #portfolioPage #portfTop {
     padding: 160px 0;
-    background: url(../img/portfTop.jpg) 50% 0 no-repeat;
+    background: url(http://zigmundsmile.ru/img/portfTop.jpg) 50% 0 no-repeat;
     background-size: cover;
     text-align: center
 }
