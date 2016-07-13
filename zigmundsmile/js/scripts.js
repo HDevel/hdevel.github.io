@@ -172,17 +172,12 @@ $(window).load(function () {
 	});
 
 	// Ч/Б картинка
-	$(".portfItem").each(function(){
-		$(".portfPhoto", this).css({"backgroundColor" : $(this).attr("data-color")})
-	});
 	$(".portfItem").hover(
 		function(){
-			$(".portfPhoto", this).addClass("imgHovered");
-			$(this).stop(1, 0).animate({"backgroundColor" : $(this).attr("data-color")}, 600);
+			$(".portfPhoto", this).css('background-color', $(this).attr("data-color"));
 		},
 		function(){
-			$(".portfPhoto", this).removeClass("imgHovered");
-			$(this).stop(1, 0).animate({"backgroundColor" : "#f2ca80"}, 600)
+			$(".portfPhoto", this).css('background-color', '');
 		}
 	);
 

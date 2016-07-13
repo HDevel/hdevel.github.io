@@ -764,25 +764,10 @@ input.button {
     height: 370px;
     padding: 0 20px;
     background: #4d4d4d;
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
-    filter: grayscale(100%);
-    filter: gray;
     -webkit-transition: all .6s;
     -moz-transition: all .6s;
     -o-transition: all .6s;
     transition: all .6s
-}
-
-.portfPhoto.imgHovered {
-    -webkit-filter: none;
-    -moz-filter: none;
-    -ms-filter: none;
-    -o-filter: none;
-    filter: none;
-    filter: none
 }
 
 .portfPhoto img {
