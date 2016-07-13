@@ -810,7 +810,12 @@ input.button {
 }
 
 #more6 {
-    display: none
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
+    display: none;
+    overflow: hidden;
 }
 
 #buttonArrow {

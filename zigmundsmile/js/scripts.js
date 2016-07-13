@@ -166,7 +166,11 @@ $(window).load(function () {
 
 	// More
 	$("#more6Button").click(function(){
-		$("#more6").slideDown(600);
+		var more = $('#more6');
+
+			more.show();
+			more.height(more[0].scrollHeight);
+
 		$(this).fadeOut();
 		//$(this).text("еще 20 проектов");
 	});
