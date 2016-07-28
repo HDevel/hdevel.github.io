@@ -39,11 +39,8 @@
     </tr>
 </table>
 
-
-<br>
-<br>
-<canvas id="xbox" width="670" height="64"></canvas>
-<canvas id="yandex" width="670" height="64"></canvas>
+<img src="" id="xbox" width="670" height="64">
+<img src="" id="yandex" width="670" height="64">
 <script>
 
     function canvasRadius(ctx, x, y, w, h, tl, tr, br, bl){
@@ -72,35 +69,49 @@
         params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
         params.status[1] = params.status[1] || 0;
         params.status[0] = params.status[0] || 0;
+
+        params.status[0] = Math.abs(params.status[0]);
+        params.status[1] = Math.abs(params.status[1]);
+
         params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
 
-        var canvas = document.getElementById(params.id),
-                ctx = canvas.getContext('2d'),
-                image = new Image(),
-                filled = params.status[0] / params.status[1];
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            image = new Image(),
+            filled = params.status[0] / params.status[1],
+            textAddition = 0;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = params.width || 670;
+        canvas.height = params.width || 64;
 
         ctx.fillStyle = '#4E4E4E';
         canvasRadius(ctx, 0, 0, 670, 64, 4);
 
-        ctx.fillStyle = '#3E3E3E';
-        ctx.fillRect(70, 42, 485, 13);
-        ctx.fillStyle = '#F1EDC8';
-        ctx.fillRect(70, 42, 485 * filled, 13);
+        if (!params.status[0] && params.status[1]) {
+            textAddition = 10;
+        } else {
+            ctx.fillStyle = '#3E3E3E';
+            ctx.fillRect(70, 42, 485, 13);
+            ctx.fillStyle = '#F1EDC8';
+            ctx.fillRect(70, 42, 485 * filled, 13);
 
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 11px verdana';
+            ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
+        }
+
+
+        if (!params.description) {
+            textAddition += 8;
+        } else {
+            ctx.fillStyle = '#fff';
+            ctx.font = 'normal 11px verdana';
+            ctx.fillText(params.description, 72, 34 + textAddition);
+        }
 
         ctx.fillStyle = '#AEBD7C';
         ctx.font = 'bold 12px verdana';
-        ctx.fillText(params.title, 72, 18);
-
-        ctx.fillStyle = '#fff';
-        ctx.font = 'normal 11px verdana';
-        ctx.fillText(params.description, 72, 34);
-
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 11px verdana';
-        ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
+        ctx.fillText(params.title, 72, 18 + textAddition);
 
         ctx.fillStyle = '#3D3D3B';
         ctx.fillRect(4, 4, 56, 56);
@@ -108,6 +119,7 @@
         image.crossOrigin = "anonymous";
         image.onload = function() {
             ctx.drawImage(this, 8, 8, 48, 48);
+            document.getElementById(params.id).src = canvas.toDataURL();
         };
         image.src = params.image;
 
@@ -121,14 +133,20 @@
         params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
         params.status[1] = params.status[1] || 0;
         params.status[0] = params.status[0] || 0;
+
+        params.status[0] = Math.abs(params.status[0]);
+        params.status[1] = Math.abs(params.status[1]);
+
         params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
 
-        var canvas = document.getElementById(params.id),
-                ctx = canvas.getContext('2d'),
-                image = new Image(),
-                filled = params.status[0] / params.status[1];
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            image = new Image(),
+            filled = params.status[0] / params.status[1],
+            textAddition = 0;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = params.width || 670;
+        canvas.height = params.width || 64;
 
         ctx.fillStyle = '#ffdb4d';
 
@@ -142,29 +160,38 @@
         ctx.fill();
 
 
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(70, 42, 485, 13);
-        ctx.fillStyle = '#FF0000';
-        ctx.fillRect(70, 42, 485 * filled, 13);
+        if (!params.status[0] && params.status[1]) {
+            textAddition = 10;
+        } else {
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(70, 42, 485, 13);
+            ctx.fillStyle = '#FF0000';
+            ctx.fillRect(70, 42, 485 * filled, 13);
+
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 11px verdana';
+            ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
+        }
+
+        if (!params.description) {
+            textAddition += 8;
+        } else {
+            ctx.fillStyle = '#666';
+            ctx.font = 'normal 11px verdana';
+            ctx.fillText(params.description, 72, 34 + textAddition);
+        }
 
         ctx.fillStyle = 'rgba(0, 0, 0,.2)';
         ctx.fillRect(4, 4, 56, 56);
 
         ctx.fillStyle = '#000';
         ctx.font = 'bold 12px verdana';
-        ctx.fillText(params.title, 72, 18);
-
-        ctx.fillStyle = '#666';
-        ctx.font = 'normal 11px verdana';
-        ctx.fillText(params.description, 72, 34);
-
-        ctx.fillStyle = '#000';
-        ctx.font = 'bold 11px verdana';
-        ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
+        ctx.fillText(params.title, 72, 18 + textAddition);
 
         image.crossOrigin = "anonymous";
         image.onload = function() {
             ctx.drawImage(this, 8, 8, 48, 48);
+            document.getElementById(params.id).src = canvas.toDataURL();
         };
         image.src = params.image;
 
@@ -173,7 +200,6 @@
         })
 
     }
-
 
     var inputs = document.getElementsByTagName('input');
 
