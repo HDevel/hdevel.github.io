@@ -9,44 +9,272 @@
             margin: 0;
             font-family: Arial;
         }
+
         img{
             display: block;
             margin-bottom: 10px;
         }
+
         a{
             text-decoration: none;
             color: #3af;
         }
+
+        textarea:focus, input:focus{
+            outline: none;
+        }
+
+        .edit{
+            position: relative;
+            border: 2px solid #ccc;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .edit img{
+            margin-bottom: 0;
+        }
+
+        .edit input{
+            position: absolute;
+            padding: 0;
+            font-style: 10px;
+            background-color: transparent;
+            border: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .edit input#badge-title{
+            top: 5px;
+            left: 70px;
+            width: 500px;
+        }
+
+        .edit input#badge-description{
+            top: 23px;
+            left: 70px;
+            width: 500px;
+        }
+
+        .edit input#badge-get{
+            top: 38px;
+            left: 564px;
+            width: 40px;
+            text-align: right;
+        }
+
+        .edit input#badge-total{
+            top: 38px;
+            left: 615px;
+            width: 40px;
+        }
+
+        .edit span{
+            position: absolute;
+            top: 39px;
+            left: 607px;
+        }
     </style>
 </head>
 <body>
-Тут можно взять иконки: <a href="https://www.iconfinder.com">iconfinder.com</a>
-<table>
-    <tr>
-        <td><label>Имга: </label></td>
-        <td><input type="text" id="badge-image" value=""></td>
-    </tr>
-    <tr>
-        <td><label>Заголовок: </label></td>
-        <td><input type="text" id="badge-title" value="Название ачивки"></td>
-    </tr>
-    <tr>
-        <td><label>Описание: </label></td>
-        <td><input type="text" id="badge-description" value="Описание"></td>
-    </tr>
-    <tr>
-        <td><label>Сколько получил? </label></td>
-        <td><input type="text" id="badge-get" value="40"></td>
-    </tr>
-    <tr>
-        <td><label>Сколько всего? </label></td>
-        <td><input type="text" id="badge-total" value="100"></td>
-    </tr>
-</table>
+Тут можно взять иконки: <a href="https://www.iconfinder.com">iconfinder.com</a><br>
+<label>Иконка: </label><input type="text" id="badge-image" value=""><br>
+<label>Редактор: </label><br>
+<div class="edit">
+    <img src="" id="input" width="670" height="64">
+    <span>/</span>
+    <input type="text" id="badge-title" value="Название ачивки">
+    <input type="text" id="badge-description" value="Описание">
+    <input type="text" id="badge-get" value="40">
+    <input type="text" id="badge-total" value="100">
+</div>
 
 <img src="" id="xbox" width="670" height="64">
 <img src="" id="yandex" width="670" height="64">
 <script>
+    var themes = {
+        xbox: {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#4E4E4E';
+                canvasRadius(ctx, 0, 0, 670, 64, 4);
+            },
+            title: {
+                color: '#AEBD7C',
+                position: [72, 18],
+                font: 'bold 12px verdana'
+            },
+            description: {
+                color: '#fff',
+                position: [72, 34],
+                font: 'normal 11px verdana'
+            },
+            counter: {
+                color: '#fff',
+                position: [567, 52],
+                font: 'bold 11px verdana'
+            },
+            progress: {
+                color: ['#3E3E3E', '#F1EDC8'],
+                position: [70, 42],
+                size: [485, 13]
+            },
+            image: {
+                position: [8, 8],
+                size: [48, 48]
+            },
+            imageBG: {
+                color: '#3D3D3B',
+                position: [4, 4],
+                size: [56, 56]
+            },
+            textAddition: [10, 8]
+        },
+        yandex: {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#ffdb4d';
+                var arr = 15;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(670 - arr, 0);
+                ctx.lineTo(670, 32);
+                ctx.lineTo(670 - arr, 64);
+                ctx.lineTo(0, 64);
+                ctx.fill();
+            },
+            title: {
+                color: '#000',
+                position: [72, 18],
+                font: 'bold 12px verdana'
+            },
+            description: {
+                color: '#666',
+                position: [72, 34],
+                font: 'normal 11px verdana'
+            },
+            counter: {
+                color: '#000',
+                position: [567, 52],
+                font: 'bold 11px verdana'
+            },
+            progress: {
+                color: ['#fff', '#FF0000'],
+                position: [70, 42],
+                size: [485, 13]
+            },
+            image: {
+                position: [8, 8],
+                size: [48, 48]
+            },
+            imageBG: {
+                color: 'rgba(0, 0, 0,.2)',
+                position: [4, 4],
+                size: [56, 56]
+            },
+            textAddition: [10, 8]
+        },
+        input: {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#eee';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            },
+            title: {
+                color: '#eee',
+                position: [72, 18],
+                font: 'bold 12px verdana'
+            },
+            description: {
+                color: '#eee',
+                position: [72, 34],
+                font: 'normal 11px verdana'
+            },
+            counter: {
+                color: '#eee',
+                position: [600, 52],
+                font: 'bold 11px verdana'
+            },
+            progress: {
+                color: ['#ddd', '#aaa'],
+                position: [70, 42],
+                size: [485, 13]
+            },
+            image: {
+                position: [8, 8],
+                size: [48, 48]
+            },
+            imageBG: {
+                color: 'rgba(0, 0, 0,.2)',
+                position: [4, 4],
+                size: [56, 56]
+            },
+            textAddition: [10, 8]
+        }
+    };
+
+    function draw(params){
+        params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
+
+        params.status[1] = params.status[1] || 0;
+        params.status[0] = params.status[0] || 0;
+        params.status[0] = Math.abs(params.status[0]);
+        params.status[1] = Math.abs(params.status[1]);
+        params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
+
+        params.width = params.width || 670;
+        params.height = params.height || 64;
+
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            icon = new Image(),
+            filled = params.status[0] / params.status[1],
+            textAddition = 0,
+
+            title = params.theme.title,
+            desc = params.theme.description,
+            counter = params.theme.counter,
+            progress = params.theme.progress,
+            image = params.theme.image,
+            imageBG = params.theme.imageBG;
+
+        canvas.width = params.width;
+        canvas.height = params.height;
+
+        params.theme.background(canvas, ctx);
+
+        if (!params.status[0] && !params.status[1]) {
+            textAddition += params.theme.textAddition[0];
+        } else {
+            ctx.fillStyle = progress.color[0];
+            ctx.fillRect(progress.position[0], progress.position[1], progress.size[0], progress.size[1]);
+            ctx.fillStyle = progress.color[1];
+            ctx.fillRect(progress.position[0], progress.position[1], progress.size[0] * filled, progress.size[1]);
+
+            ctx.fillStyle = counter.color;
+            ctx.font = counter.font;
+            ctx.fillText(params.status[0] + '/' + params.status[1], counter.position[0], counter.position[1]);
+        }
+
+        if (!params.description) {
+            textAddition += params.theme.textAddition[1];
+        } else {
+            ctx.fillStyle = desc.color;
+            ctx.font = desc.font;
+            ctx.fillText(params.description, desc.position[0], desc.position[1] + textAddition);
+        }
+
+        ctx.fillStyle = title.color;
+        ctx.font = title.font;
+        ctx.fillText(params.title, title.position[0], title.position[1] + textAddition);
+
+        ctx.fillStyle = imageBG.color;
+        ctx.fillRect(imageBG.position[0], imageBG.position[1], imageBG.size[0], imageBG.size[1]);
+
+        icon.crossOrigin = "anonymous";
+        icon.onload = function() {
+            ctx.drawImage(this, image.position[0], image.position[1], image.size[0], image.size[1]);
+            document.getElementById(params.id).src = canvas.toDataURL();
+        };
+        icon.src = params.image;
+    }
 
     function canvasRadius(ctx, x, y, w, h, tl, tr, br, bl){
         var r = x + w,
@@ -70,142 +298,6 @@
 
     }
 
-    function fillXbox(params) {
-        params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
-        params.status[1] = params.status[1] || 0;
-        params.status[0] = params.status[0] || 0;
-
-        params.status[0] = Math.abs(params.status[0]);
-        params.status[1] = Math.abs(params.status[1]);
-
-        params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
-
-        var canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d'),
-            image = new Image(),
-            filled = params.status[0] / params.status[1],
-            textAddition = 0;
-
-        canvas.width = params.width || 670;
-        canvas.height = params.width || 64;
-
-        ctx.fillStyle = '#4E4E4E';
-        canvasRadius(ctx, 0, 0, 670, 64, 4);
-
-        if (!params.status[0] && params.status[1]) {
-            textAddition = 10;
-        } else {
-            ctx.fillStyle = '#3E3E3E';
-            ctx.fillRect(70, 42, 485, 13);
-            ctx.fillStyle = '#F1EDC8';
-            ctx.fillRect(70, 42, 485 * filled, 13);
-
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 11px verdana';
-            ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
-        }
-
-
-        if (!params.description) {
-            textAddition += 8;
-        } else {
-            ctx.fillStyle = '#fff';
-            ctx.font = 'normal 11px verdana';
-            ctx.fillText(params.description, 72, 34 + textAddition);
-        }
-
-        ctx.fillStyle = '#AEBD7C';
-        ctx.font = 'bold 12px verdana';
-        ctx.fillText(params.title, 72, 18 + textAddition);
-
-        ctx.fillStyle = '#3D3D3B';
-        ctx.fillRect(4, 4, 56, 56);
-
-        image.crossOrigin = "anonymous";
-        image.onload = function() {
-            ctx.drawImage(this, 8, 8, 48, 48);
-            document.getElementById(params.id).src = canvas.toDataURL();
-        };
-        image.src = params.image;
-
-        canvas.addEventListener('click', function () {
-            open(canvas.toDataURL())
-        })
-
-    }
-
-    function fillYandex(params) {
-        params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
-        params.status[1] = params.status[1] || 0;
-        params.status[0] = params.status[0] || 0;
-
-        params.status[0] = Math.abs(params.status[0]);
-        params.status[1] = Math.abs(params.status[1]);
-
-        params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
-
-        var canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d'),
-            image = new Image(),
-            filled = params.status[0] / params.status[1],
-            textAddition = 0;
-
-        canvas.width = params.width || 670;
-        canvas.height = params.width || 64;
-
-        ctx.fillStyle = '#ffdb4d';
-
-        var arr = 15;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(670 - arr, 0);
-        ctx.lineTo(670, 32);
-        ctx.lineTo(670 - arr, 64);
-        ctx.lineTo(0, 64);
-        ctx.fill();
-
-
-        if (!params.status[0] && params.status[1]) {
-            textAddition = 10;
-        } else {
-            ctx.fillStyle = '#fff';
-            ctx.fillRect(70, 42, 485, 13);
-            ctx.fillStyle = '#FF0000';
-            ctx.fillRect(70, 42, 485 * filled, 13);
-
-            ctx.fillStyle = '#000';
-            ctx.font = 'bold 11px verdana';
-            ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
-        }
-
-        if (!params.description) {
-            textAddition += 8;
-        } else {
-            ctx.fillStyle = '#666';
-            ctx.font = 'normal 11px verdana';
-            ctx.fillText(params.description, 72, 34 + textAddition);
-        }
-
-        ctx.fillStyle = 'rgba(0, 0, 0,.2)';
-        ctx.fillRect(4, 4, 56, 56);
-
-        ctx.fillStyle = '#000';
-        ctx.font = 'bold 12px verdana';
-        ctx.fillText(params.title, 72, 18 + textAddition);
-
-        image.crossOrigin = "anonymous";
-        image.onload = function() {
-            ctx.drawImage(this, 8, 8, 48, 48);
-            document.getElementById(params.id).src = canvas.toDataURL();
-        };
-        image.src = params.image;
-
-        canvas.addEventListener('click', function () {
-            open(canvas.toDataURL())
-        })
-
-    }
-
     var inputs = document.getElementsByTagName('input');
 
     for (var i = 0; i < inputs.length; i++) {
@@ -221,20 +313,31 @@
             badgeGet = parseInt(document.getElementById('badge-get').value),
             total = parseInt(document.getElementById('badge-total').value);
 
-        fillXbox({
+        draw({
             id: 'xbox',
             image: image,
             status: [badgeGet, total],
             title: title,
-            description: description
+            description: description,
+            theme: themes.xbox
         });
 
-        fillYandex({
+        draw({
             id: 'yandex',
             image: image,
             status: [badgeGet, total],
             title: title,
-            description: description
+            description: description,
+            theme: themes.yandex
+        });
+
+        draw({
+            id: 'input',
+            image: image,
+            status: [1, 9],
+            title: '[ ]',
+            description: '[ ]',
+            theme: themes.input
         });
     }
 
