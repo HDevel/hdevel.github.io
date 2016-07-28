@@ -58,21 +58,21 @@
 
         .edit input#badge-get{
             top: 38px;
-            left: 564px;
+            left: 560px;
             width: 40px;
             text-align: right;
         }
 
         .edit input#badge-total{
             top: 38px;
-            left: 615px;
+            left: 610px;
             width: 40px;
         }
 
         .edit span{
             position: absolute;
             top: 39px;
-            left: 607px;
+            left: 603px;
         }
     </style>
 </head>
@@ -81,7 +81,7 @@
 <label>Иконка: </label><input type="text" id="badge-image" value=""><br>
 <label>Редактор: </label><br>
 <div class="edit">
-    <img src="" id="input" width="670" height="64">
+    <img src="" id="input" width="650" height="64">
     <span>/</span>
     <input type="text" id="badge-title" value="Название ачивки">
     <input type="text" id="badge-description" value="Описание">
@@ -89,14 +89,14 @@
     <input type="text" id="badge-total" value="100">
 </div>
 
-<img src="" id="xbox" width="670" height="64">
-<img src="" id="yandex" width="670" height="64">
+<img src="" id="xbox" width="650" height="64">
+<img src="" id="yandex" width="650" height="64">
 <script>
     var themes = {
         xbox: {
             background: function (canvas, ctx) {
                 ctx.fillStyle = '#4E4E4E';
-                canvasRadius(ctx, 0, 0, 670, 64, 4);
+                canvasRadius(ctx, 0, 0, 650, 64, 4);
             },
             title: {
                 color: '#AEBD7C',
@@ -110,13 +110,13 @@
             },
             counter: {
                 color: '#fff',
-                position: [567, 52],
+                position: [560, 52],
                 font: 'bold 11px verdana'
             },
             progress: {
                 color: ['#3E3E3E', '#F1EDC8'],
                 position: [70, 42],
-                size: [485, 13]
+                size: [480, 13]
             },
             image: {
                 position: [8, 8],
@@ -135,10 +135,10 @@
                 var arr = 15;
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
-                ctx.lineTo(670 - arr, 0);
-                ctx.lineTo(670, 32);
-                ctx.lineTo(670 - arr, 64);
-                ctx.lineTo(0, 64);
+                ctx.lineTo(canvas.width - arr, 0);
+                ctx.lineTo(canvas.width, canvas.height * 0.5);
+                ctx.lineTo(canvas.width - arr, canvas.height);
+                ctx.lineTo(0, canvas.height);
                 ctx.fill();
             },
             title: {
@@ -153,13 +153,13 @@
             },
             counter: {
                 color: '#000',
-                position: [567, 52],
+                position: [560, 52],
                 font: 'bold 11px verdana'
             },
             progress: {
                 color: ['#fff', '#FF0000'],
                 position: [70, 42],
-                size: [485, 13]
+                size: [480, 13]
             },
             image: {
                 position: [8, 8],
@@ -219,7 +219,7 @@
         params.status[1] = Math.abs(params.status[1]);
         params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
 
-        params.width = params.width || 670;
+        params.width = params.width || 650;
         params.height = params.height || 64;
 
         var canvas = document.createElement('canvas'),
