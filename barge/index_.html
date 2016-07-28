@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        canvas{
+            display: block
+        }
+    </style>
+</head>
+<body>
+<label>Заголовок: </label><input type="text" id="badge-title" value="text">
+<label>Описание: </label><input type="text" id="badge-description">
+<input type="text" id="badge-get">
+<input type="text" id="badge-total">
+<canvas id="xbox" width="670" height="64"></canvas>
+<script>
+
+    function canvasRadius(ctx, x, y, w, h, tl, tr, br, bl){
+        var r = x + w,
+                b = y + h;
+
+        tr = tr || tl;
+        br = br || tl;
+        bl = bl || tl;
+
+        ctx.beginPath();
+        ctx.moveTo(x + tl,y);
+        ctx.lineTo(r - tr, y);
+        ctx.arcTo(r, y, r, tr + y, tr);
+        ctx.lineTo(r, b - br);
+        ctx.arcTo(r, b, r - br, b, br);
+        ctx.lineTo(x + bl, b);
+        ctx.arcTo(x, b, x, b - bl, bl);
+        ctx.lineTo(x, y + tl);
+        ctx.arcTo(x, y, x + tl, y, tl);
+        ctx.fill();
+
+    }
+
+    function fillXbox(params) {
+        params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
+        params.status[1] = params.status[1] || 0;
+        params.status[0] = params.status[0] || 0;
+        params.status[0] = params.status[0] > params.status[1] ? params.status[1] : params.status[0];
+
+        var canvas = document.getElementById(params.id),
+            ctx = canvas.getContext('2d'),
+            image = new Image(),
+            filled = params.status[0] / params.status[1];
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#4E4E4E';
+        canvasRadius(ctx, 0, 0, 670, 64, 4);
+
+        ctx.fillStyle = '#3E3E3E';
+        ctx.fillRect(70, 42, 485, 13);
+        ctx.fillStyle = '#F1EDC8';
+        ctx.fillRect(70, 42, 485 * filled, 13);
+
+
+        ctx.fillStyle = '#AEBD7C';
+        ctx.font = 'bold 12px verdana';
+        ctx.fillText(params.title, 72, 18);
+
+        ctx.fillStyle = '#fff';
+        ctx.font = 'normal 11px verdana';
+        ctx.fillText(params.description, 72, 34);
+
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 11px verdana';
+        ctx.fillText(params.status[0] + '/' + params.status[1], 567, 52);
+
+        ctx.fillStyle = '#3D3D3B';
+        ctx.fillRect(4, 4, 56, 56);
+
+        image.crossOrigin = "anonymous";
+        image.onload = function() {
+            ctx.drawImage(this, 8, 8, 48, 48);
+        };
+        image.src = params.image;
+
+        canvas.addEventListener('click', function () {
+            open(canvas.toDataURL())
+        })
+
+    }
+    var inputs = document.getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', updateBadge);
+    }
+
+    updateBadge();
+
+    function updateBadge() {
+        var title = document.getElementById('badge-title').value,
+            description = document.getElementById('badge-description').value,
+            badgeGet = parseInt(document.getElementById('badge-get').value),
+            total = parseInt(document.getElementById('badge-total').value);
+        fillXbox({
+            id: 'xbox',
+            status: [badgeGet, total],
+            title: title,
+            description: description
+        });
+    }
+
+</script>
+</body>
+</html>

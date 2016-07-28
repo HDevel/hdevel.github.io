@@ -71,9 +71,11 @@ $(window).load(function () {
 
 		setTimeout(function () {
 			yesNoSlide.height(yesNoSlide[0].scrollHeight);
-		}, 500);
+		}, 1000);
 
-		$("#screen5 .content").animate({margin:"0 auto"});
+
+		$("#screen5").css('padding', '0');
+		$("#screen5 .content").css('margin', '0 auto');
 
 		if(elemId == "yes"){
 			$("[sinc='yes']").prop("checked", true).val("Есть база").addClass("active");
