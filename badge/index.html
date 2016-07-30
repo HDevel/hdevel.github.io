@@ -93,42 +93,6 @@
 <img src="" id="yandex" width="650" height="64">
 <script>
     var themes = {
-        xbox: {
-            background: function (canvas, ctx) {
-                ctx.fillStyle = '#4E4E4E';
-                canvasRadius(ctx, 0, 0, 650, 64, 4);
-            },
-            title: {
-                color: '#AEBD7C',
-                position: [72, 18],
-                font: 'bold 12px verdana'
-            },
-            description: {
-                color: '#fff',
-                position: [72, 34],
-                font: 'normal 11px verdana'
-            },
-            counter: {
-                color: '#fff',
-                position: [560, 52],
-                font: 'bold 11px verdana'
-            },
-            progress: {
-                color: ['#3E3E3E', '#F1EDC8'],
-                position: [70, 42],
-                size: [480, 13]
-            },
-            image: {
-                position: [8, 8],
-                size: [48, 48]
-            },
-            imageBG: {
-                color: '#3D3D3B',
-                position: [4, 4],
-                size: [56, 56]
-            },
-            textAddition: [10, 8]
-        },
         yandex: {
             background: function (canvas, ctx) {
                 ctx.fillStyle = '#ffdb4d';
@@ -142,35 +106,20 @@
                 ctx.fill();
             },
             title: {
-                color: '#000',
-                position: [72, 18],
-                font: 'bold 12px verdana'
+                color: '#000'
             },
             description: {
-                color: '#666',
-                position: [72, 34],
-                font: 'normal 11px verdana'
+                color: '#666'
             },
             counter: {
-                color: '#000',
-                position: [560, 52],
-                font: 'bold 11px verdana'
+                color: '#000'
             },
             progress: {
-                color: ['#fff', '#FF0000'],
-                position: [70, 42],
-                size: [480, 13]
-            },
-            image: {
-                position: [8, 8],
-                size: [48, 48]
+                color: ['#fff', '#FF0000']
             },
             imageBG: {
-                color: 'rgba(0, 0, 0,.2)',
-                position: [4, 4],
-                size: [56, 56]
-            },
-            textAddition: [10, 8]
+                color: 'rgba(0, 0, 0,.2)'
+            }
         },
         input: {
             background: function (canvas, ctx) {
@@ -178,37 +127,25 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             },
             title: {
-                color: '#eee',
-                position: [72, 18],
-                font: 'bold 12px verdana'
+                color: '#eee'
             },
             description: {
-                color: '#eee',
-                position: [72, 34],
-                font: 'normal 11px verdana'
+                color: '#eee'
             },
             counter: {
-                color: '#eee',
-                position: [600, 52],
-                font: 'bold 11px verdana'
+                color: '#eee'
             },
             progress: {
-                color: ['#ddd', '#aaa'],
-                position: [70, 42],
-                size: [485, 13]
-            },
-            image: {
-                position: [8, 8],
-                size: [48, 48]
+                color: ['#ddd', '#aaa']
             },
             imageBG: {
-                color: 'rgba(0, 0, 0,.2)',
-                position: [4, 4],
-                size: [56, 56]
-            },
-            textAddition: [10, 8]
+                color: 'rgba(0, 0, 0,.2)'
+            }
         }
     };
+
+    themes.yandex2 = prepareParams(themes.yandex);
+    themes.yandex2.title.color = '#f0f';
 
     function draw(params){
         params.image = params.image || 'https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-html-5-48.png';
@@ -276,6 +213,43 @@
         icon.src = params.image;
     }
 
+    function prepareParams(params) {
+        var rtn = {},
+            defaultParams = {
+            background: function (canvas, ctx) {
+                ctx.fillStyle = '#4E4E4E';
+                canvasRadius(ctx, 0, 0, 650, 64, 4);
+            },
+            title: { color: '#AEBD7C', position: [72, 18], font: 'bold 12px verdana' },
+            description: { color: '#fff', position: [72, 34], font: 'normal 11px verdana' },
+            counter: { color: '#fff', position: [560, 52], font: 'bold 11px verdana' },
+            progress: { color: ['#3E3E3E', '#F1EDC8'], position: [70, 42], size: [480, 13] },
+            image: { position: [8, 8], size: [48, 48] },
+            imageBG: { color: '#3D3D3B', position: [4, 4], size: [56, 56] },
+            textAddition: [10, 8]
+        };
+
+        if(!params) {
+            return defaultPrams;
+        }
+
+        ['title', 'description', 'counter', 'progress', 'image', 'imageBG'].forEach(function (elem) {
+            ['position', 'color', 'size', 'font'].forEach(function (p) {
+                if (defaultParams[elem][p]) {
+                    params[elem] = params[elem] || {};
+                    rtn[elem] = rtn[elem] || {};
+                    rtn[elem][p] = params[elem][p] || defaultParams[elem][p];
+                }
+            })
+        });
+
+        ['textAddition', 'background'].forEach(function (v) {
+            rtn[v] = params[v] || defaultParams[v];
+        });
+
+        return rtn
+    }
+
     function canvasRadius(ctx, x, y, w, h, tl, tr, br, bl){
         var r = x + w,
                 b = y + h;
@@ -313,22 +287,15 @@
             badgeGet = parseInt(document.getElementById('badge-get').value),
             total = parseInt(document.getElementById('badge-total').value);
 
-        draw({
-            id: 'xbox',
-            image: image,
-            status: [badgeGet, total],
-            title: title,
-            description: description,
-            theme: themes.xbox
-        });
-
-        draw({
-            id: 'yandex',
-            image: image,
-            status: [badgeGet, total],
-            title: title,
-            description: description,
-            theme: themes.yandex
+        ['xbox', 'yandex'].forEach(function (v) {
+            draw({
+                id: v,
+                image: image,
+                status: [badgeGet, total],
+                title: title,
+                description: description,
+                theme: prepareParams(themes[v] || {})
+            });
         });
 
         draw({
@@ -337,7 +304,7 @@
             status: [1, 9],
             title: '[ ]',
             description: '[ ]',
-            theme: themes.input
+            theme: prepareParams(themes.input)
         });
     }
 
