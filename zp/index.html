@@ -1,0 +1,91 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Зарплата</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon-precomposed" href="icon114.jpg">
+    <meta charset="utf-8">
+    <style>
+        div{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Arial;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="willIn">
+
+</div>
+<script>
+
+    var current = getDateParams(new Date()),
+        nextMonth = current.month < 11 ? current.month + 1 : 0,
+        will,
+        will5 = getDateParams(new Date(current.year, current.month, 5)),
+        will20 = getDateParams(new Date(current.year, current.month, 20)),
+        willNext5 = getDateParams(new Date(current.year, nextMonth, 5)),
+        willIn,
+        zpavns = 'Зарплата',
+        message = '';
+
+    [will5, will20, willNext5].forEach(function (date) {
+        var over = date.wday > 5 ? date.wday - 5 : 0;
+        date.wday -= over;
+        date.day -= over;
+    });
+
+    if (current.day <= will5.day) {
+        will = will5;
+        willIn = will.day - current.day;
+    } else if (current.day <= will20.day) {
+        will = will20;
+        willIn = will.day - current.day;
+        zpavns = 'Аванс'
+    } else {
+        var days = new Date(current.year, current.month, 0).getDate();
+
+        will = willNext5;
+        willIn = days - current.day + will.day;
+    }
+
+    if (willIn === 0) {
+        message = zpavns + ' будет сегодня';
+    } else if (willIn < 7) {
+        var wIn = 'в';
+
+        if (will.wday === 2) {
+            wIn = 'во';
+        }
+
+        message = zpavns + ' будет ' + wIn + ' ' + will.wdayWillName[will.wday];
+    } else {
+        message = zpavns + ' будет через ' + willIn + ' дней';
+    }
+
+    document.getElementById('willIn').innerHTML = message;
+
+    function getDateParams(date) {
+        return {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            day: date.getDate(),
+            wday: date.getDay(),
+            wdayWillName: [
+                '',
+                'понедельник',
+                'вторник',
+                'среду',
+                'четверг',
+                'пятницу'
+            ]
+        }
+    }
+</script>
+</body>
+</html>
