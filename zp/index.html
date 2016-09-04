@@ -56,6 +56,10 @@
 
     if (willIn === 0) {
         message = zpavns + ' будет сегодня';
+    } else if (willIn === 1) {
+        message = zpavns + ' будет завтра';
+    } else if (willIn === 2) {
+        message = zpavns + ' будет послезавтра';
     } else if (willIn < 7) {
         var wIn = 'в';
 
