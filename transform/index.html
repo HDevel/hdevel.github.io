@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>B</title>
+    <script src="jq.js"></script>
+    <style>
+        .some-block {
+            background-color: #f0f;
+            position: absolute;
+        }
+
+        .translate {
+            background-color: #ff0;
+            width: 50px;
+            height: 50px;
+        }
+
+        .color0 .translate{
+            background-color: #0ff;
+        }
+
+        .color1 .translate{
+            background-color: #00f;
+        }
+
+        .color2 .translate{
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="some-block color0" style="width: 150px; height: 100px; top: 100px; left: 100px">
+    <div class="translate"></div>
+</div>
+<div class="some-block color1" style="width: 100px; height: 50px; top: 230px; left: 150px">
+</div>
+<div class="some-block color2" style="width: 100px; height: 50px; top: 140px; left: 280px">
+</div>
+<script>
+
+    var blockOne;
+
+    $(document).ready(function() {
+        blockOne = $('.translate');
+
+        $('.some-block').bind('click', function(e) {
+            translate(blockOne, this);
+        })
+    });
+
+    function translate(block, to) {
+        block = $(block);
+        to = $(to);
+
+        var transform = {
+                x: $(block).offset().left - $(to).offset().left,
+                y: $(block).offset().top - $(to).offset().top
+            },
+            transTime = 500,
+            style = block.attr('style');
+
+        block.css({
+            transform: 'translate(' + transform.x + 'px, ' + transform.y + 'px)',
+            transition: 'all ' + transTime + 'ms',
+            position: 'absolute',
+            'z-index': 10
+        });
+
+        setTimeout(function() {
+            block.css({
+                transform: 'translate(0, 0)'
+            });
+        }, 10);
+
+        setTimeout(function() {
+            to.append(block);
+        }, 1);
+
+        setTimeout(function() {
+            block.css({
+                transform: '',
+                transition: '',
+                position: '',
+                'z-index': ''
+            });
+        }, transTime + 10);
+    }
+</script>
+</body>
+</html>
