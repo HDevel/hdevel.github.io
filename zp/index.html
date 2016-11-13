@@ -35,10 +35,15 @@
         message = '';
 
     [will5, will20, willNext5].forEach(function (date) {
+        if(!date.wday) {
+            date.wday = 7;
+        }
+
         var over = date.wday > 5 ? date.wday - 5 : 0;
         date.wday -= over;
         date.day -= over;
     });
+
 
     if (current.day <= will5.day) {
         will = will5;
