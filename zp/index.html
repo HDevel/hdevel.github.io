@@ -72,9 +72,9 @@
             wIn = 'во';
         }
 
-        message = zpavns + ' будет ' + wIn + ' ' + will.wdayWillName[will.wday];
+        message = zpavns + ' будет ' + wIn + ' ' + will.wdayWillName[will.wday - 1];
     } else {
-        message = zpavns + ' будет через ' + willIn + ' дней';
+        message = zpavns + ' будет через ' + willIn + ' дней (' + will.wdayWillNameShort[will.wday - 1] + ')';
     }
 
     document.getElementById('willIn').innerHTML = message;
@@ -86,13 +86,13 @@
             day: date.getDate(),
             wday: date.getDay(),
             wdayWillName: [
-                '',
                 'понедельник',
                 'вторник',
                 'среду',
                 'четверг',
                 'пятницу'
-            ]
+            ],
+            wdayWillNameShort: ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ']
         }
     }
 </script>
