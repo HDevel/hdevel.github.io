@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #f0f;
+        }
+
+        .screen {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .rect {
+            font-family: Arial;
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            font-size: 70px;
+            background: linear-gradient(-45deg, rgba(35, 61, 17, .95), rgba(86, 178, 116, .95));
+            bottom: 250px;
+            left: 120px;
+            border: 3px solid #fff;
+            color: #fff;
+        }
+
+        .rect > span {
+            position: absolute;
+            font-size: 10px;
+            line-height: 10px;
+        }
+
+        .rect > .mass {
+            top: 5px;
+            left: 5px;
+        }
+
+        .rect > .num {
+            bottom: 20px;
+            left: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .rect > .beNum {
+            bottom: 5px;
+            left: 5px;
+        }
+
+        .rect > .param {
+            top: 3px;
+            right: 5px;
+            line-height: 12px;
+        }
+
+        .rect > .text {
+            position: absolute;
+            top: 0;
+            left: 115%;
+            white-space: nowrap;
+        }
+
+        .rect.rect_type_tl {
+            transform: translate(153px, 153px);
+        }
+    </style>
+</head>
+<body>
+<div class="screen">
+    <div class="rect rect_type_tl">
+        <span class="mass">12.011</span>
+        <span class="num">6</span>
+        <span class="beNum">2 -4</span>
+        <span class="param">-4<br>-3<br>-2</span>
+        Ui
+        <div class="text">
+            62 demo
+        </div>
+    </div>
+    <div class="rect rect_type_br">
+        <span class="mass">12.011</span>
+        <span class="num">6</span>
+        <span class="beNum">2 -4</span>
+        <span class="param">-4<br>-3<br>-2</span>
+        Vi
+        <div class="text">
+            deo
+        </div>
+    </div>
+    <img src="breaking_bad_01.jpg">
+</div>
+
+<script>
+    var mass = document.querySelectorAll('.mass'),
+        num = document.querySelectorAll('.num'),
+        beNum = document.querySelectorAll('.beNum'),
+        param = document.querySelectorAll('.param'),
+        numCount;
+
+    for (var i = 0; i < mass.length; i++) {
+        mass[i].innerHTML = (Math.random() * 99).toFixed(3);
+    }
+
+    for (var i = 0; i < mass.length; i++) {
+        numCount = Math.random() * 4;
+        param[i].innerHTML = '';
+
+        for (var j = 0; j < numCount; j++) {
+            param[i].innerHTML += Math.round(Math.random() * 15) * (Math.random() > 0.5 ? -1 : 1) + '<br>';
+        }
+    }
+
+    for (var i = 0; i < mass.length; i++) {
+        num[i].innerHTML = Math.round(Math.random() * 30);
+    }
+
+    for (var i = 0; i < mass.length; i++) {
+        beNum[i].innerHTML = Math.round(Math.random() * 30) + '-' + Math.round(Math.random() * 30);
+    }
+
+</script>
+</body>
+</html>
