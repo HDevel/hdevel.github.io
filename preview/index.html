@@ -5,7 +5,7 @@
     <title>B</title>
 </head>
 <body>
-    <video class="video" src="01.1.mp4" autoplay loop muted playsinline></video>
+    <video class="video" src="01.1.mp4" autoplay muted playsinline></video>
     <script>
         var urls = [
             '01.1.mp4',
@@ -27,7 +27,7 @@
 
             video.src = urls[Math.floor(Math.random() * urls.length)];
 //            video.play();
-        }, 10000);
+        }, 1000);
     </script>
 </body>
 </html>
