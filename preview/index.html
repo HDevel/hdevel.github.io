@@ -5,6 +5,29 @@
     <title>B</title>
 </head>
 <body>
-    <video src="01.1.mp4" autoplay></video>
+    <video class="video" src="01.1.mp4" autoplay></video>
+    <script>
+        var urls = [
+            '01.1.mp4',
+            '02.1.mp4',
+            '03.1.mp4',
+            '04.1.mp4',
+            '07.1.mp4',
+            '08.1.mp4',
+            '09.1.mp4',
+            '10.1.mp4',
+            '11.1.mp4',
+            '12.1.mp4'
+        ];
+        document.addEventListener('touchstart', function(){
+            document.querySelector('.video').play();
+        });
+        setInterval(function() {
+            var video = document.querySelector('.video');
+
+            video.src = urls[Math.floor(Math.random() * urls.length)];
+//            video.play();
+        }, 1000);
+    </script>
 </body>
 </html>
