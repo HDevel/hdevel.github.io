@@ -5,29 +5,29 @@
     <title>B</title>
 </head>
 <body>
-    <video class="video" src="01.1.mp4" autoplay muted playsinline></video>
-    <script>
-        var video = document.querySelector('.video');
-        var urls = [
-            '01.1.mp4',
-            '02.1.mp4',
-            '03.1.mp4',
-            '04.1.mp4',
-            '07.1.mp4',
-            '08.1.mp4',
-            '09.1.mp4',
-            '10.1.mp4',
-            '11.1.mp4',
-            '12.1.mp4'
-        ];
+<video class="video" src="01.1.mp4" autoplay muted playsinline></video>
+<script>
+    var video = document.querySelector('.video');
+    var urls = [
+        '01.1.mp4',
+        '02.1.mp4',
+        '03.1.mp4',
+        '04.1.mp4',
+        '07.1.mp4',
+        '08.1.mp4',
+        '09.1.mp4',
+        '10.1.mp4',
+        '11.1.mp4',
+        '12.1.mp4'
+    ];
 
-        document.addEventListener('touchstart', function(){
-            video.play();
-        });
+    document.addEventListener('touchstart', function() {
+        video.play();
+    });
 
-        video.addEventListener('ended', function(){
-            video.src = urls[Math.floor(Math.random() * urls.length)];
-        });
-    </script>
+    video.addEventListener('ended', function() {
+        video.src = urls[Math.floor(Math.random() * urls.length)];
+    });
+</script>
 </body>
 </html>
