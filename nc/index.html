@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>NC</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon-precomposed" href="icon114.jpg">
+    <meta charset="utf-8">
+    <style>
+        body {
+            background: #000;
+        }
+
+        div {
+            color: #0f0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Courier;
+            font-size: 28px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="need"></div>
+<script>
+    var dom = document.getElementById('need');
+    var start = 1525590000000;
+    var perMs = 0.00001929012346;
+    var sec = 1000;
+    var min = sec * 60;
+    var hrs = min * 60;
+    var day = hrs * 24;
+
+    setInterval(function(){
+        dom.innerHTML = (perMs * (Date.now() - start)).toFixed(3) + '₽';
+    }, 50);
+</script>
+</body>
+</html>
