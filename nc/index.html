@@ -78,10 +78,9 @@
 
     setInterval(function(){
         var need = ((perMs * (Date.now() - start)) - have).toFixed(3);
-        var formatedNeed = need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         var formatedHave = have.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        dom.innerHTML = `${formatedNeed}₽<br>${formatedHave}₽`;
+        dom.innerHTML = `${need}₽<br>${formatedHave}₽`;
     }, 50);
 </script>
 </body>
