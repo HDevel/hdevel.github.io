@@ -11,7 +11,7 @@
             background: #000;
         }
 
-        div {
+        #need {
             color: #0f0;
             position: fixed;
             top: 50%;
@@ -21,10 +21,45 @@
             font-size: 28px;
             text-align: center;
         }
+
+        #buttons {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 25%;
+        }
+
+        #buttons > button {
+            position: absolute;
+            bottom: 0;
+            width: 50%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            opacity: 0;
+        }
+
+        #buttons > #minus {
+            left: 0;
+        }
+
+        #buttons > #plus {
+            right: 0;
+        }
     </style>
 </head>
 <body>
 <div id="need"></div>
+<div id="buttons">
+    <button id="minus" ontouchstart="addHave(-5000);">
+        -
+    </button>
+    <button id="plus" ontouchstart="addHave(5000);">
+        +
+    </button>
+</div>
 <script>
     var dom = document.getElementById('need');
     var start = 1525590000000;
@@ -33,9 +68,20 @@
     var min = sec * 60;
     var hrs = min * 60;
     var day = hrs * 24;
+    var have = Number(localStorage.getItem('have'));
+
+    function addHave(add) {
+        have += add;
+
+        localStorage.setItem('have', have);
+    }
 
     setInterval(function(){
-        dom.innerHTML = (perMs * (Date.now() - start)).toFixed(3) + '₽';
+        var need = ((perMs * (Date.now() - start)) - have).toFixed(3);
+        var formatedNeed = need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var formatedHave = have.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        dom.innerHTML = `${formatedNeed}₽<br>${formatedHave}₽`;
     }, 50);
 </script>
 </body>
