@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YY</title>
+</head>
+<body>
+<script>
+    function downloadImage(src, dskr){
+        var time = 0;
+        var img = document.createElement('img');
+
+        img.addEventListener('load', function(){
+            console.log(Date.now() - time, dskr || '');
+            next();
+        })
+        document.body.appendChild(img);
+
+        img.src = src + Math.random();
+        time = Date.now();
+    }
+
+    function downloadVideo(src, dskr) {
+        var time = 0;
+        var video = document.createElement('video');
+
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+
+        video.addEventListener('play', function(){
+            console.log(Date.now() - time, dskr);
+            next();
+        })
+
+        document.body.appendChild(video);
+
+        video.src = src + Math.random();
+        time = Date.now();
+    }
+
+    var curr = -1;
+    var srcs = [
+        {
+            type: 'image',
+            src: 'https://i.ytimg.com/an_webp/oPJR9gNMHOQ/mqdefault_6s.webp?du=3000&sqp=CICK-tsF&rs=AOn4CLC_HhhIib5ENznbXawZ7ThIqCW3jA&',
+            dscr: 'image 1'
+        },
+        {
+            type: 'image',
+            src: 'https://i.ytimg.com/an_webp/LSl7n2kVtvs/mqdefault_6s.webp?du=3000&sqp=CJuV-tsF&rs=AOn4CLA25W31JdC0zl642VAW2pit4iearQ&',
+            dscr: 'image 2'
+        },
+        {
+            type: 'video',
+            src: 'https://strm.yandex.net/get-video-preview-host/A73C86E0EE091B9B0D0A027214C8F33C377FB9506CD9CD01823CB83D0E226ED369B8FF49CB013F6EDEEBD773082BB29E644867287B33278D323A6C9BDFA74E7E-fixed.mp4?',
+            dscr: 'в начале'
+        },
+        {
+            type: 'video',
+            src: 'https://strm.yandex.net/get-video-preview-host/A73C86E0EE091B9B0D0A027214C8F33C377FB9506CD9CD01823CB83D0E226ED369B8FF49CB013F6EDEEBD773082BB29E644867287B33278D323A6C9BDFA74E7E.mp4?',
+            dscr: 'в конце'
+        },
+        {
+            type: 'video',
+            src: 'https://strm-mskmar12.strm.yandex.net/video-preview/A73C86E0EE091B9B0D0A027214C8F33C377FB9506CD9CD01823CB83D0E226ED369B8FF49CB013F6EDEEBD773082BB29E644867287B33278D323A6C9BDFA74E7E-fixed.mp4?',
+            dscr: 'в начале прямой'
+        },
+        {
+            type: 'video',
+            src: 'https://strm-kiv03.strm.yandex.net/video-preview/A73C86E0EE091B9B0D0A027214C8F33C377FB9506CD9CD01823CB83D0E226ED369B8FF49CB013F6EDEEBD773082BB29E644867287B33278D323A6C9BDFA74E7E.mp4?',
+            dscr: 'в конце прямой'
+        }
+    ];
+
+    function next() {
+        curr++;
+
+        if (!srcs[curr]) {
+            return
+        }
+
+        switch(srcs[curr].type) {
+            case 'image':
+                downloadImage(srcs[curr].src, srcs[curr].dscr);
+                break
+
+            case 'video':
+                downloadVideo(srcs[curr].src, srcs[curr].dscr);
+                break
+        }
+    }
+
+    console.clear();
+
+    next();
+</script>
+</body>
+</html>
