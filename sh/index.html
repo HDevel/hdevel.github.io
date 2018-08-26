@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>NC</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon-precomposed" href="icon114.jpg">
+    <meta charset="utf-8">
+    <style>
+        body {
+            background: #000;
+        }
+
+        #left {
+            color: #0f0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Courier;
+            font-size: 88px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="left"></div>
+<script>
+    var dom = document.getElementById('left');
+    var timeOver = 1535403599000;
+    var sec = 1000;
+    var min = sec * 60;
+    var hr = min * 60;
+    var day = hr * 24;
+
+    setInterval(function(){
+        var left = timeOver - Date.now();
+
+        for (var d = 0; left >= day; d++) {
+            left -= day;
+        }
+
+        for (var h = 0; left >= hr; h++) {
+            left -= hr;
+        }
+
+        for (var m = 0; left >= min; m++) {
+            left -= min;
+        }
+
+        for (var s = 0; left >= sec; s++) {
+            left -= sec;
+        }
+
+        left = left.toString();
+
+        while (left.length < 3) {
+            left = '0' + left;
+        }
+
+        dom.innerHTML = `${d}:${h.toString().length === 1 ? ('0' + h) : h}:${m.toString().length === 1 ? ('0' + m) : m}:${s.toString().length === 1 ? ('0' + s) : s}:${left}`;
+    }, 10);
+</script>
+</body>
+</html>
