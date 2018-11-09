@@ -1,0 +1,62 @@
+
+Symbol_00.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eyes
+  rotate: false
+  xy: 730, 869
+  size: 201, 61
+  orig: 201, 61
+  offset: 0, 0
+  index: -1
+eyes_red
+  rotate: false
+  xy: 730, 932
+  size: 203, 65
+  orig: 203, 65
+  offset: 0, 0
+  index: -1
+grin_1
+  rotate: false
+  xy: 2, 2
+  size: 249, 139
+  orig: 249, 139
+  offset: 0, 0
+  index: -1
+grin_2
+  rotate: false
+  xy: 389, 788
+  size: 339, 209
+  orig: 339, 209
+  offset: 0, 0
+  index: -1
+hotspot
+  rotate: false
+  xy: 389, 593
+  size: 257, 193
+  orig: 257, 193
+  offset: 0, 0
+  index: -1
+hotspot_2
+  rotate: false
+  xy: 389, 593
+  size: 257, 193
+  orig: 257, 193
+  offset: 0, 0
+  index: -1
+mask_blur
+  rotate: false
+  xy: 2, 548
+  size: 385, 449
+  orig: 385, 449
+  offset: 0, 0
+  index: -1
+substrate
+  rotate: false
+  xy: 2, 143
+  size: 373, 403
+  orig: 373, 403
+  offset: 0, 0
+  index: -1

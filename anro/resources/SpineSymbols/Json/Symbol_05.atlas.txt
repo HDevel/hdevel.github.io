@@ -1,0 +1,69 @@
+
+Symbol_05.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background
+  rotate: false
+  xy: 284, 607
+  size: 226, 228
+  orig: 226, 228
+  offset: 0, 0
+  index: -1
+beak2
+  rotate: false
+  xy: 284, 521
+  size: 128, 84
+  orig: 128, 84
+  offset: 0, 0
+  index: -1
+frame
+  rotate: false
+  xy: 2, 235
+  size: 269, 275
+  orig: 269, 275
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 2, 57
+  size: 239, 176
+  orig: 239, 176
+  offset: 0, 0
+  index: -1
+housing
+  rotate: false
+  xy: 512, 654
+  size: 224, 181
+  orig: 224, 181
+  offset: 0, 0
+  index: -1
+stone1
+  rotate: false
+  xy: 512, 613
+  size: 48, 39
+  orig: 48, 39
+  offset: 0, 0
+  index: -1
+stone2
+  rotate: false
+  xy: 2, 2
+  size: 59, 53
+  orig: 59, 53
+  offset: 0, 0
+  index: -1
+stone3
+  rotate: false
+  xy: 738, 797
+  size: 41, 38
+  orig: 41, 38
+  offset: 0, 0
+  index: -1
+toucan copy
+  rotate: false
+  xy: 2, 512
+  size: 280, 323
+  orig: 280, 323
+  offset: 0, 0
+  index: -1

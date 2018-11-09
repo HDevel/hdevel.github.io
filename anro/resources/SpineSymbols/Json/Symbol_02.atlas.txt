@@ -1,0 +1,97 @@
+
+Symbol_02.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ays
+  rotate: false
+  xy: 2, 2
+  size: 104, 52
+  orig: 104, 52
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 564, 788
+  size: 235, 234
+  orig: 235, 234
+  offset: 0, 0
+  index: -1
+eyelids
+  rotate: false
+  xy: 130, 125
+  size: 103, 37
+  orig: 103, 37
+  offset: 0, 0
+  index: -1
+eyelids_2
+  rotate: false
+  xy: 564, 756
+  size: 98, 30
+  orig: 98, 30
+  offset: 0, 0
+  index: -1
+eyelids_3
+  rotate: false
+  xy: 436, 719
+  size: 96, 31
+  orig: 96, 31
+  offset: 0, 0
+  index: -1
+eyelids_3 copy
+  rotate: false
+  xy: 2, 683
+  size: 295, 339
+  orig: 295, 339
+  offset: 0, 0
+  index: -1
+frame
+  rotate: false
+  xy: 2, 408
+  size: 265, 273
+  orig: 265, 273
+  offset: 0, 0
+  index: -1
+frame_bill
+  rotate: false
+  xy: 299, 752
+  size: 263, 270
+  orig: 263, 270
+  offset: 0, 0
+  index: -1
+housing
+  rotate: false
+  xy: 2, 164
+  size: 264, 242
+  orig: 264, 242
+  offset: 0, 0
+  index: -1
+jaw
+  rotate: false
+  xy: 2, 56
+  size: 126, 106
+  orig: 126, 106
+  offset: 0, 0
+  index: -1
+mustache
+  rotate: false
+  xy: 299, 693
+  size: 135, 57
+  orig: 135, 57
+  offset: 0, 0
+  index: -1
+muzzle
+  rotate: false
+  xy: 801, 817
+  size: 201, 205
+  orig: 201, 205
+  offset: 0, 0
+  index: -1
+teeth_top
+  rotate: false
+  xy: 130, 88
+  size: 65, 35
+  orig: 65, 35
+  offset: 0, 0
+  index: -1

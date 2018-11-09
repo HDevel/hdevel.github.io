@@ -1,0 +1,645 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @font-face {
+          font-family: Aero;
+          src: url("resources/Aero.ttf");
+      }
+      html, body {
+        padding: 0;
+        margin: 0;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      body::after {
+        position: absolute;
+        width:1px;
+        height:1px;
+        overflow: hidden;
+        z-index: -1;
+        /* content:  url("resources/HUD/sound_on.png")
+                  url("resources/HUD/sound_off.png")
+                  
+                  url("resources/HUD/MinusButton_1.png")
+                  url("resources/HUD/MinusButton_2.png")
+                  url("resources/HUD/MinusButton_3.png")
+                  url("resources/HUD/MinusButton_4.png")
+
+                  url("resources/HUD/PlusButton_1.png")
+                  url("resources/HUD/PlusButton_2.png")
+                  url("resources/HUD/PlusButton_3.png")
+                  url("resources/HUD/PlusButton_4.png")
+
+                  url("resources/HUD/lobbyButton_1.png")
+                  url("resources/HUD/lobbyButton_2.png")
+                  url("resources/HUD/lobbyButton_3.png")
+                  url("resources/HUD/lobbyButton_4.png")
+
+                  url("resources/HUD/SpinButton_1.png")
+                  url("resources/HUD/SpinButton_2.png")
+                  url("resources/HUD/SpinButton_3.png")
+
+                  url("resources/HUD/PayTable_1.png")
+                  url("resources/HUD/PayTable_2.png")
+                  url("resources/HUD/PayTable_3.png")
+                  url("resources/HUD/PayTable_4.png")
+
+                  url("resources/FreespinPopup/FreespinButton_1.png")
+                  url("resources/FreespinPopup/FreespinButton_2.png")
+                  url("resources/FreespinPopup/FreespinButton_3.png")
+                  url("resources/FreespinPopup/FreespinPopup.png")
+
+                  url("resources/Paytable/BackButton_1.png")
+                  url("resources/Paytable/BackButton_2.png")
+                  url("resources/Paytable/BackButton_3.png")
+                  url("resources/Paytable/PTPage1.png")
+                  url("resources/Paytable/PTPage2.png")
+                  url("resources/Paytable/scroll_left_1.png")
+                  url("resources/Paytable/scroll_left_2.png")
+                  url("resources/Paytable/scroll_left_3.png")
+                  url("resources/Paytable/scroll_left_4.png")
+                  url("resources/Paytable/scroll_right_1.png")
+                  url("resources/Paytable/scroll_right_2.png")
+                  url("resources/Paytable/scroll_right_3.png")
+                  url("resources/Paytable/scroll_right_4.png")
+                  ; */
+      }
+      .scaled {
+        position: absolute;
+      }
+      #ui {
+        width: 100%;
+        height: 100%;
+        width: 960px;
+        height: 540px;
+        margin: 0 auto;
+        position: relative;
+        transform-origin: 0 0;
+        transform: scale(0.5);
+        background-color: black;
+      }
+      #plate {
+        background-image: url("resources/HUD/FrontLayer.png");
+        width: 1920px;
+        height: 1080px;
+        pointer-events: none;
+      }
+      #back {
+        background-image: url("resources/HUD/BackLayer.png");
+        width: 1228px;
+        height: 738px;
+        left: 346px;
+        top: 161px;
+      }
+      #button_back {
+        background-image: url("resources/HUD/BottomPanelBack.png");
+        width: 1920px;
+        height: 164px;
+        top: 916px;
+      }
+      #spin_bet {
+        color: #fce45e;;
+        width: 200px;
+        height: 100px;
+        left: 198px;
+        top: 1015px;
+        font-size: 38px;
+        font-family: Aero;
+        text-shadow: 1px 1px 3px black;
+        text-align: center;
+      }
+      #scene {
+        width: 1920px;
+        height: 1080px;
+      }
+      #preloader {
+        width: 1920px;
+        height: 1080px;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        font-family: Aero;
+        font-weight: lighter;
+        background-image: url("resources/HUD/lobby_bg.png");
+      }
+      #preloader_text, #freespin_popup_text {
+        color: #fce45e;;
+      }
+      #freespin_popup {
+        width: 1920px;
+        height: 1080px;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        font-family: Aero;
+        font-weight: lighter;
+      }
+      #balance {
+        left: 280px;
+        top: 960px;
+        font-size: 38px;
+        font-family: Aero;
+        text-shadow: 1px 1px 3px black;
+        color: #fce45e;
+        width: 250px;
+        height: 50px;
+        display: flex;
+        align-items: left;
+        justify-content: flex-start;
+      }
+      #credit {
+        left: 170px;
+        top: 960px;
+        font-size: 38px;
+        font-family: Aero;
+        text-shadow: 1px 1px 3px black;
+        color: #fce45e;
+        width: 100px;
+        height: 50px;
+        display: flex;
+        align-items: left;
+        justify-content: flex-end;
+      }
+      #freespin_panel {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        font-family: Aero;
+        text-shadow: 1px 1px 3px black;
+        color: #fce45e;
+        background-image: url("resources/HUD/FreeSpinPlate.png");
+        width: 422px;
+        height: 180px;
+        top: 900px;
+        left: 1470px;
+      }
+      #freespin_title {
+        margin-top: 50px;
+        font-size: 42px;
+      }
+      #freespin_count {
+        font-size: 42px;
+      }
+      #total_win_panel {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        font-family: Aero;
+        text-shadow: 1px 1px 3px black;
+        color: #fce45e;
+        left: 760px;
+        top: 948px;
+        width: 400px;
+      }
+      #total_win_title {
+        font-size: 38px;
+      }
+      #total_win_size {
+        margin-top: 5px;
+        font-size: 68px;
+        font-weight: bold;
+      }
+    </style>
+    <style>
+      #lobby_button {
+        width: 115px;
+        height: 115px;
+        left: 20px;
+        top: 20px;
+        background-image: url("resources/HUD/lobbyButton_1.png");
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+      #lobby_button:hover {
+        background-image: url("resources/HUD/lobbyButton_2.png");
+      }
+      #lobby_button:active {
+        background-image: url("resources/HUD/lobbyButton_3.png");
+      }
+      #sound_button {
+        width: 115px;
+        height: 115px;
+        left: 1785px;
+        top: 20px;
+        background-image: url("resources/HUD/sound_on.png");
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+      .off {
+        background-image: url("resources/HUD/sound_off.png") !important;
+      }
+      #back_plate {
+        background-image: url("resources/HUD/bp_plateWebGL.png");
+        width: 1920px;
+        height: 150px;
+        top: 930px;
+        background-size: cover; 
+      }
+      #win_plate {
+        background-image: url("resources/HUD/winPlateWebGl.png");
+        width: 877px;
+        height: 170px;
+        top: 910px;
+        left: 520px;
+      }
+      #spin_button {
+        background-repeat: no-repeat;
+        width: 422px;
+        height: 180px;
+        top: 900px;
+        left: 1470px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 52px;
+        font-family: Aero;
+        text-shadow: 1px 1px 3px black;
+        font-weight: 400;
+        text-transform: uppercase;
+        user-select: none;
+      }
+      .spin_button {
+        background-image: url("resources/HUD/SpinButton_1.png");
+        cursor: pointer;
+      }
+      .spin_button:hover {
+        background-image: url("resources/HUD/SpinButton_2.png");
+        cursor: pointer;
+      }
+      .spin_button:active {
+        background-image: url("resources/HUD/SpinButton_3.png");
+        cursor: pointer;
+      }
+      .spin_button_disabled {
+        background-image: url("resources/HUD/SpinButton_3.png");
+        cursor: pointer;
+      }
+      #bet_plus {
+        width: 90px;
+        height: 90px;
+        background-image: url("resources/HUD/PlusButton_1.png");
+        top: 990px;
+        left: 420px;
+        cursor: pointer;
+      }
+      #bet_plus:hover {
+        background-image: url("resources/HUD/PlusButton_2.png");
+      }
+      #bet_plus:active {
+        background-image: url("resources/HUD/PlusButton_3.png");
+      }
+      #bet_minus {
+        width: 90px;
+        height: 90px;
+        background-image: url("resources/HUD/MinusButton_1.png");
+        top: 990px;
+        left: 80px;
+        cursor: pointer;
+      }
+      #bet_minus:hover {
+        background-image: url("resources/HUD/MinusButton_2.png");
+      }
+      #bet_minus:active {
+        background-image: url("resources/HUD/MinusButton_3.png");
+      }
+      #freespin_popup_back {
+        background-image: url("resources/FreespinPopup/FreespinPopup.png");
+        width: 1398px;
+        height: 979px;
+      }
+      #freespin_popup_close {
+        background-image: url("resources/FreespinPopup/FreespinButton_1.png");
+        width: 429px;
+        height: 122px;
+        position: relative;
+        left: 503px;
+        top: 619px;
+        cursor: pointer;
+        user-select: none;
+      }
+      #freespin_popup_close:hover {
+        background-image: url("resources/FreespinPopup/FreespinButton_2.png");
+      }
+      #freespin_popup_close:active {
+        background-image: url("resources/FreespinPopup/FreespinButton_3.png");
+      }
+      #paytable {
+        width: 115px;
+        height: 115px;
+        left: 1330px;
+        top: 950px;
+        background-repeat: no-repeat;
+      }
+      .paytable {
+        background-image: url("resources/HUD/PayTable_1.png");
+        cursor: pointer;
+      }
+      .paytable:hover {
+        background-image: url("resources/HUD/PayTable_2.png");
+      }
+      .paytable:active {
+        background-image: url("resources/HUD/PayTable_3.png");
+      }
+      .paytable_off {
+        background-image: url("resources/HUD/PayTable_4.png");
+        cursor: pointer;
+      }
+      #paytable_popup {
+        width: 1920px;
+        height: 1080px;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        font-family: Aero;
+        font-weight: lighter;
+      }
+      #paytable_page1, #paytable_page2 {
+        width: 1920px;
+        height: 1080px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      #paytable_page1 {
+        background-image: url("resources/Paytable/PTPage1.png")
+      }
+      #paytable_page2 {
+        background-image: url("resources/Paytable/PTPage2.png");
+        display: none;
+      }
+      #payable_close {
+        /* background-image: url("resources/Paytable/BackButton_1.png"); */
+        width: 750px;
+        height: 170px;
+        top: 910px;
+        left: 585px;
+        user-select: none;
+        cursor: pointer;
+      }
+      #payable_close > div {
+        background-image: url("resources/Paytable/BackButton_1.png");
+        width: 850px;
+        height: 170px;
+        pointer-events: none;
+        left: -50px;
+      }
+      #payable_close:hover > div {
+        background-image: url("resources/Paytable/BackButton_2.png");
+      }
+      #payable_close:active > div {
+        background-image: url("resources/Paytable/BackButton_3.png");
+      }
+      #paytable_left {
+        width: 300px;
+        height: 152px;
+        background-image: url("resources/Paytable/scroll_left_1.png");
+        top: 928px;
+        left: 353px;
+        cursor: pointer;
+      }
+      #paytable_left:hover {
+        background-image: url("resources/Paytable/scroll_left_2.png");
+      }
+      #paytable_left:active {
+        background-image: url("resources/Paytable/scroll_left_3.png");
+      }
+      #paytable_right {
+        width: 300px;
+        height: 152px;
+        background-image: url("resources/Paytable/scroll_right_1.png");
+        top: 928px;
+        left: 1267px;
+        cursor: pointer;
+      }
+      #paytable_right:hover {
+        background-image: url("resources/Paytable/scroll_right_2.png");
+      }
+      #paytable_right:active {
+        background-image: url("resources/Paytable/scroll_right_3.png");
+      }
+      .line_count {
+        font-family: Aero;
+        font-size: 32px;
+        text-align: center;
+        color: rgb(150, 135, 90);
+        top: 453px;
+        text-shadow: 1px 1px 3px rgb(52, 52, 23);
+        width: 52px;
+        height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: rgb(52, 52, 23); */
+        /* border: 4px solid rgb(150, 135, 90); */
+        /* border-radius: 8px; */
+        /* box-shadow: 1px 1px 3px rgb(52, 52, 23); */
+      }
+    </style>
+
+    <!-- <link rel="preloader" as="image" href="resources/HUD/MinusButton_1.png">
+    <link rel="preloader" as="image" href="resources/HUD/MinusButton_2.png">
+    <link rel="preloader" as="image" href="resources/HUD/MinusButton_3.png">
+    <link rel="preloader" as="image" href="resources/HUD/MinusButton_4.png">
+
+    <link rel="preloader" as="image" href="resources/HUD/PlusButton_1.png">
+    <link rel="preloader" as="image" href="resources/HUD/PlusButton_2.png">
+    <link rel="preloader" as="image" href="resources/HUD/PlusButton_3.png">
+    <link rel="preloader" as="image" href="resources/HUD/PlusButton_4.png">
+
+    <link rel="preloader" as="image" href="resources/HUD/lobbyButton_1.png">
+    <link rel="preloader" as="image" href="resources/HUD/lobbyButton_2.png">
+    <link rel="preloader" as="image" href="resources/HUD/lobbyButton_3.png">
+    <link rel="preloader" as="image" href="resources/HUD/lobbyButton_4.png">
+
+    <link rel="preloader" as="image" href="resources/HUD/SpinButton_1.png">
+    <link rel="preloader" as="image" href="resources/HUD/SpinButton_2.png">
+    <link rel="preloader" as="image" href="resources/HUD/SpinButton_3.png">
+
+    <link rel="preloader" as="image" href="resources/HUD/PayTable_1.png">
+    <link rel="preloader" as="image" href="resources/HUD/PayTable_2.png">
+    <link rel="preloader" as="image" href="resources/HUD/PayTable_3.png">
+    <link rel="preloader" as="image" href="resources/HUD/PayTable_4.png">
+
+    <link rel="preloader" as="image" href="resources/FreespinPopup/FreespinButton_1.png">
+    <link rel="preloader" as="image" href="resources/FreespinPopup/FreespinButton_2.png">
+    <link rel="preloader" as="image" href="resources/FreespinPopup/FreespinButton_3.png">
+    <link rel="preloader" as="image" href="resources/FreespinPopup/FreespinPopup.png">
+
+    <link rel="preloader" as="image" href="resources/Paytable/BackButton_1.png">
+    <link rel="preloader" as="image" href="resources/Paytable/BackButton_2.png">
+    <link rel="preloader" as="image" href="resources/Paytable/BackButton_3.png">
+    <link rel="preloader" as="image" href="resources/Paytable/PTPage1.png">
+    <link rel="preloader" as="image" href="resources/Paytable/PTPage2.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_left_1.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_left_2.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_left_3.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_left_4.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_right_1.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_right_2.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_right_3.png">
+    <link rel="preloader" as="image" href="resources/Paytable/scroll_right_4.png"> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.10/Rx.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.3/pixi.js"></script>
+    <script src="pixi/pixi-spine.js"></script>
+    <script src="pixi/pixi-sound.js"></script>
+  </head>
+  <body>
+    <div id="ui">
+      <div id="back" class="scaled"></div>
+      <canvas id="scene" class="scaled"></canvas>
+      <div id="plate" class="scaled"></div>
+      <div class="scaled line_count" style="left: 280px">25</div>
+      <div class="scaled line_count right_lines" style="left: 1588px">25</div>
+
+      <div id="lobby_button" class="scaled"></div>
+      <div id="sound_button" class="scaled"></div>
+
+      <div id="back_plate" class="scaled"></div>
+
+      <div id="credit" class="scaled">Credit:</div>
+      <div id="balance" class="scaled">1 000 000 000</div>
+
+      <div id="bet_minus" class="scaled"></div>
+      <div id="spin_bet" class="scaled">default</div>
+      <div id="bet_plus" class="scaled"></div>
+
+      <div id="win_plate" class="scaled"></div>
+      <div id="paytable" class="paytable scaled"></div>
+      <div id="spin_button" class="spin_button scaled"></div>
+
+      <div id="total_win_panel" class="scaled">
+          <div id="total_win_title">Total Win</div>
+          <div id="total_win_size">10000</div>
+        </div>
+
+      <div id="freespin_panel" class="scaled">
+        <div id="freespin_title">Free Spins</div>
+        <div id="freespin_count">10/10</div>
+      </div>
+
+      <div id="paytable_popup" class="scaled">
+        <div id="paytable_page1" class="scaled"></div>
+        <div id="paytable_page2" class="scaled"></div>
+        <div id="paytable_left" class="scaled"></div>
+        <div id="paytable_right" class="scaled"></div>
+        <div id="payable_close" class="scaled"><div class="scaled"></div></div>
+      </div>
+
+      <div id="preloader" class="scaled">
+        <img src="resources/HUD/Jungle_icon.png" class="scaled" style="top: 18%">
+        <div id="preloader_text" class="scaled" style="top: 68%">Preparing Slots...</div>
+      </div>
+      <div id="freespin_popup" class="scaled">
+        <div id="freespin_popup_back">
+          <div id="freespin_popup_close"></div>
+        </div>
+      </div>
+    </div>
+    <div style="position: fixed; left: 10000px">
+      <img src="resources/HUD/sound_on.png">
+      <img src="resources/HUD/sound_off.png">
+
+      <img src="resources/HUD/MinusButton_1.png">
+      <img src="resources/HUD/MinusButton_2.png">
+      <img src="resources/HUD/MinusButton_3.png">
+      <img src="resources/HUD/MinusButton_4.png">
+
+      <img src="resources/HUD/PlusButton_1.png">
+      <img src="resources/HUD/PlusButton_2.png">
+      <img src="resources/HUD/PlusButton_3.png">
+      <img src="resources/HUD/PlusButton_4.png">
+
+      <img src="resources/HUD/lobbyButton_1.png">
+      <img src="resources/HUD/lobbyButton_2.png">
+      <img src="resources/HUD/lobbyButton_3.png">
+      <img src="resources/HUD/lobbyButton_4.png">
+
+      <img src="resources/HUD/SpinButton_1.png">
+      <img src="resources/HUD/SpinButton_2.png">
+      <img src="resources/HUD/SpinButton_3.png">
+
+      <img src="resources/HUD/PayTable_1.png">
+      <img src="resources/HUD/PayTable_2.png">
+      <img src="resources/HUD/PayTable_3.png">
+      <img src="resources/HUD/PayTable_4.png">
+
+      <img src="resources/FreespinPopup/FreespinButton_1.png">
+      <img src="resources/FreespinPopup/FreespinButton_2.png">
+      <img src="resources/FreespinPopup/FreespinButton_3.png">
+      <img src="resources/FreespinPopup/FreespinPopup.png">
+
+      <img src="resources/Paytable/BackButton_1.png">
+      <img src="resources/Paytable/BackButton_2.png">
+      <img src="resources/Paytable/BackButton_3.png">
+      <img src="resources/Paytable/PTPage1.png">
+      <img src="resources/Paytable/PTPage2.png">
+      <img src="resources/Paytable/scroll_left_1.png">
+      <img src="resources/Paytable/scroll_left_2.png">
+      <img src="resources/Paytable/scroll_left_3.png">
+      <img src="resources/Paytable/scroll_left_4.png">
+      <img src="resources/Paytable/scroll_right_1.png">
+      <img src="resources/Paytable/scroll_right_2.png">
+      <img src="resources/Paytable/scroll_right_3.png">
+      <img src="resources/Paytable/scroll_right_4.png">
+
+      <!-- <div src="background-image: url('resources/HUD/sound_on.png')" />
+      <div style="background-image: url('resources/HUD/sound_off.png')"/>
+
+      <div style="background-image: url('resources/HUD/MinusButton_1.png')" />
+      <div style="background-image: url('resources/HUD/MinusButton_2.png')" />
+      <div style="background-image: url('resources/HUD/MinusButton_3.png')" />
+      <div style="background-image: url('resources/HUD/MinusButton_4.png')" />
+
+      <div style="background-image: url('resources/HUD/PlusButton_1.png')" />
+      <div style="background-image: url('resources/HUD/PlusButton_2.png')" />
+      <div style="background-image: url('resources/HUD/PlusButton_3.png')" />
+      <div style="background-image: url('resources/HUD/PlusButton_4.png')"/>
+
+      <div style="background-image: url('resources/HUD/lobbyButton_1.png')"/>
+      <div style="background-image: url('resources/HUD/lobbyButton_2.png')"/>
+      <div style="background-image: url('resources/HUD/lobbyButton_3.png')"/>
+      <div style="background-image: url('resources/HUD/lobbyButton_4.png')"/>
+
+      <div style="background-image: url('resources/HUD/SpinButton_1.png')"/>
+      <div style="background-image: url('resources/HUD/SpinButton_2.png')"/>
+      <div style="background-image: url('resources/HUD/SpinButton_3.png')"/>
+
+      <div style="background-image: url('resources/HUD/PayTable_1.png')"/>
+      <div style="background-image: url('resources/HUD/PayTable_2.png')"/>
+      <div style="background-image: url('resources/HUD/PayTable_3.png')"/>
+      <div style="background-image: url('resources/HUD/PayTable_4.png')"/>
+
+      <div style="background-image: url('resources/FreespinPopup/FreespinButton_1.png')"/>
+      <div style="background-image: url('resources/FreespinPopup/FreespinButton_2.png')"/>
+      <div style="background-image: url('resources/FreespinPopup/FreespinButton_3.png')"/>
+      <div style="background-image: url('resources/FreespinPopup/FreespinPopup.png')"/>
+
+      <div style="background-image: url('resources/Paytable/BackButton_1.png')"/>
+      <div style="background-image: url('resources/Paytable/BackButton_2.png')"/>
+      <div style="background-image: url('resources/Paytable/BackButton_3.png')"/>
+      <div style="background-image: url('resources/Paytable/PTPage1.png')"/>
+      <div style="background-image: url('resources/Paytable/PTPage2.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_left_1.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_left_2.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_left_3.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_left_4.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_right_1.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_right_2.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_right_3.png')"/>
+      <div style="background-image: url('resources/Paytable/scroll_right_4.png')"/> -->
+    </div>
+  <script type="text/javascript" src="bundle.js"></script></body>
+</html> 

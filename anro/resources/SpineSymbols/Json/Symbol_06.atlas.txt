@@ -1,0 +1,76 @@
+
+Symbol_06.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background
+  rotate: false
+  xy: 2, 74
+  size: 234, 234
+  orig: 234, 234
+  offset: 0, 0
+  index: -1
+chameleon
+  rotate: false
+  xy: 2, 586
+  size: 348, 348
+  orig: 348, 348
+  offset: 0, 0
+  index: -1
+frame
+  rotate: false
+  xy: 2, 310
+  size: 267, 274
+  orig: 267, 274
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 352, 649
+  size: 239, 285
+  orig: 239, 285
+  offset: 0, 0
+  index: -1
+language
+  rotate: false
+  xy: 346, 486
+  size: 125, 98
+  orig: 125, 98
+  offset: 0, 0
+  index: -1
+lower_eyelids
+  rotate: true
+  xy: 271, 386
+  size: 198, 73
+  orig: 198, 73
+  offset: 0, 0
+  index: -1
+lower_eyelids_2
+  rotate: false
+  xy: 352, 586
+  size: 198, 61
+  orig: 198, 61
+  offset: 0, 0
+  index: -1
+pupils
+  rotate: false
+  xy: 593, 788
+  size: 151, 66
+  orig: 151, 66
+  offset: 0, 0
+  index: -1
+upper_eyelids
+  rotate: false
+  xy: 593, 856
+  size: 193, 78
+  orig: 193, 78
+  offset: 0, 0
+  index: -1
+upper_eyelids_2
+  rotate: false
+  xy: 2, 2
+  size: 192, 70
+  orig: 192, 70
+  offset: 0, 0
+  index: -1

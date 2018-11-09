@@ -1,0 +1,20 @@
+
+Symbol_07.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 0
+  rotate: false
+  xy: 2, 256
+  size: 268, 221
+  orig: 268, 221
+  offset: 0, 0
+  index: -1
+Layer 1
+  rotate: false
+  xy: 2, 2
+  size: 223, 252
+  orig: 223, 252
+  offset: 0, 0
+  index: -1
