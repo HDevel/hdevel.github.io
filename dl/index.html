@@ -18,5 +18,30 @@
     <br>
     <a href="http://www.setwalls.ru/download.php?file=201312/2560x1600/setwalls.ru-64906.jpg" download="img2.jpg">Скачать v4 - без target и rel</a>
     <br>
+
+    <div>скачать</div>
+
+    <script>
+        document.querySelector('div').addEventListener(function(){
+
+            unction onStartedDownload(id) {
+                console.log(`Started downloading: ${id}`);
+            }
+
+            function onFailed(error) {
+                console.log(`Download failed: ${error}`);
+            }
+
+            var downloadUrl = "https://rhome.by/wp-content/uploads/2018/07/9-skandinavskii-stil-v-interere.jpg";
+
+            var downloading = browser.downloads.download({
+                url : downloadUrl,
+                filename : 'my-image-again.png',
+                conflictAction : 'uniquify'
+            });
+
+            downloading.then(onStartedDownload, onFailed);
+        })
+    </script>
 </body>
 </html>
