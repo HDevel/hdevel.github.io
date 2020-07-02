@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon-precomposed" href="icon114.jpg">
     <meta charset="utf-8">
     <style>
-        div{
+        #willIn {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -16,85 +16,99 @@
             font-size: 20px;
             text-align: center;
         }
+
+        #inBox {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            right: 0;
+            font-family: Arial;
+            font-size: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<div id="willIn">
-
-</div>
+<div id="inBox"></div>
+<div id="willIn"></div>
 <script>
+  var current = getDateParams(new Date()),
+    nextMonth = current.month < 11 ? current.month + 1 : 0,
+    will,
+    will5 = getDateParams(new Date(current.year, current.month, 5)),
+    will20 = getDateParams(new Date(current.year, current.month, 20)),
+    willNext5 = getDateParams(new Date(current.year, nextMonth, 5)),
+    willIn,
+    zpavns = 'Зарплата',
+    message = '';
 
-    var current = getDateParams(new Date()),
-        nextMonth = current.month < 11 ? current.month + 1 : 0,
-        will,
-        will5 = getDateParams(new Date(current.year, current.month, 5)),
-        will20 = getDateParams(new Date(current.year, current.month, 20)),
-        willNext5 = getDateParams(new Date(current.year, nextMonth, 5)),
-        willIn,
-        zpavns = 'Зарплата',
-        message = '';
-
-    [will5, will20, willNext5].forEach(function (date) {
-        if(!date.wday) {
-            date.wday = 7;
-        }
-
-        var over = date.wday > 5 ? date.wday - 5 : 0;
-        date.wday -= over;
-        date.day -= over;
-    });
-
-
-    if (current.day <= will5.day) {
-        will = will5;
-        willIn = will.day - current.day;
-    } else if (current.day <= will20.day) {
-        will = will20;
-        willIn = will.day - current.day;
-        zpavns = 'Аванс'
-    } else {
-        var days = new Date(current.year, current.month, 0).getDate();
-
-        will = willNext5;
-        willIn = days - current.day + will.day;
+  [will5, will20, willNext5].forEach(function(date) {
+    if (!date.wday) {
+      date.wday = 7;
     }
 
-    if (willIn === 0) {
-        message = zpavns + ' будет сегодня';
-    } else if (willIn === 1) {
-        message = zpavns + ' будет завтра';
-    } else if (willIn === 2) {
-        message = zpavns + ' будет послезавтра';
-    } else if (willIn < 7) {
-        var wIn = 'в';
+    var over = date.wday > 5 ? date.wday - 5 : 0;
+    date.wday -= over;
+    date.day -= over;
+  });
 
-        if (will.wday === 2) {
-            wIn = 'во';
-        }
 
-        message = zpavns + ' будет ' + wIn + ' ' + will.wdayWillName[will.wday - 1];
-    } else {
-        message = zpavns + ' будет через ' + willIn + ' дней (' + will.wdayWillNameShort[will.wday - 1] + ')';
+  if (current.day <= will5.day) {
+    will = will5;
+    willIn = will.day - current.day;
+  } else if (current.day <= will20.day) {
+    will = will20;
+    willIn = will.day - current.day;
+    zpavns = 'Аванс';
+  } else {
+    var days = new Date(current.year, current.month, 0).getDate();
+
+    will = willNext5;
+    willIn = days - current.day + will.day;
+  }
+
+  if (willIn === 0) {
+    message = zpavns + ' будет сегодня';
+  } else if (willIn === 1) {
+    message = zpavns + ' будет завтра';
+  } else if (willIn === 2) {
+    message = zpavns + ' будет послезавтра';
+  } else if (willIn < 7) {
+    var wIn = 'в';
+
+    if (will.wday === 2) {
+      wIn = 'во';
     }
 
-    document.getElementById('willIn').innerHTML = message;
+    message = zpavns + ' будет ' + wIn + ' ' + will.wdayWillName[will.wday - 1];
+  } else {
+    message = zpavns + ' будет через ' + willIn + ' дней (' + will.wdayWillNameShort[will.wday - 1] + ')';
+  }
 
-    function getDateParams(date) {
-        return {
-            year: date.getFullYear(),
-            month: date.getMonth(),
-            day: date.getDate(),
-            wday: date.getDay(),
-            wdayWillName: [
-                'понедельник',
-                'вторник',
-                'среду',
-                'четверг',
-                'пятницу'
-            ],
-            wdayWillNameShort: ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ']
-        }
-    }
+  document.getElementById('willIn').innerHTML = message;
+
+  function getDateParams(date) {
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth(),
+      day: date.getDate(),
+      wday: date.getDay(),
+      wdayWillName: [
+        'понедельник',
+        'вторник',
+        'среду',
+        'четверг',
+        'пятницу'
+      ],
+      wdayWillNameShort: ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ']
+    };
+  }
+
+  var start = (new Date('Jan 01 2020')).getTime();
+  var end = (new Date('Dec 31 2020')).getTime();
+  var curr = Date.now();
+
+  document.getElementById('inBox').innerHTML = Math.ceil(500000 * (curr - start) / (end - start)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + '₽';
 </script>
 </body>
 </html>
