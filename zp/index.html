@@ -105,10 +105,11 @@
   }
 
   var start = (new Date('Jan 01 2020')).getTime();
-  var end = (new Date('Dec 31 2020')).getTime();
   var curr = Date.now();
+  var days = (curr - start) / 1000 / 60 / 60 / 24;
+  var need = days * 1100 + 7500;
 
-  document.getElementById('inBox').innerHTML = Math.ceil(400000 * (curr - start) / (end - start)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  document.getElementById('inBox').innerHTML = Math.ceil(need).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 </script>
 </body>
 </html>
