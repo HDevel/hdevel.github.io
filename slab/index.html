@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Слаб</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .sticker {
+            font-family: "Helvetica Neue";
+            line-height: 24px;
+            font-size: 20px;
+            margin-top: 50px;
+            border: 1px solid #ccc;
+            border-left: 0;
+            border-right: 0;
+            height: 160px;
+            position: relative;
+        }
+
+        .sticker__year {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .sticker__nominal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .sticker__full-name {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            left: 10px;
+            bottom: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sticker__event {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 5px;
+        }
+
+        input {
+            display: block;
+            height: 40px;
+            font-size: 26px;
+        }
+    </style>
+</head>
+<body>
+<div class="sticker">
+
+</div>
+<br />
+<form name="slab">
+    <label>Год выпуска <input name="year" value="2022"></label>
+    <label>Страна <input name="country" value="Великобритания"></label>
+    <label>Название <input name="name" value="Британия"></label>
+    <label>Номинал <input name="nominal" value="2$"></label>
+    <label>Событие <input name="event" value="От бабушки, на рождение Марка"></label>
+</form>
+<script>
+    const form = document.querySelector('form');
+    const onChage = function() {
+        const sticker = document.querySelector('.sticker');
+
+        sticker.innerHTML = `
+        <div class="sticker__year">${form.elements[0].value}</div>
+        <div class="sticker__nominal">${form.elements[3].value}</div>
+        <div class="sticker__full-name">
+            ${form.elements[1].value} - ${form.elements[2].value}
+            <div class="sticker__event">
+                ${form.elements[4].value}
+            </div>
+        </div>
+        `;
+
+    };
+    form.addEventListener('change', onChage);
+    onChage();
+</script>
+</body>
+</html>
